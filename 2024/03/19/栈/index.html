@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>栈 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="栈什么是栈？">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="栈"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/null">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-栈" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2024-03-19T02:54:18.000Z"><a href="/2024/03/19/%E6%A0%88/">2024-03-19</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">栈</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><p>什么是栈？</p>
+<span id="more"></span>
+
+<h2 id="一、栈的基本概念"><a href="#一、栈的基本概念" class="headerlink" title="一、栈的基本概念"></a>一、栈的基本概念</h2><h3 id="1-栈的定义"><a href="#1-栈的定义" class="headerlink" title="1.栈的定义"></a>1.栈的定义</h3><p>**栈(stack)**是一种线性表，这种线性表只</p>
+<p>在一端进行插入或者删除。可以形象地理解为平时吃的罐装的乐事薯片，只能从开口拿出或者放入薯片。</p>
+<p><strong>栈又称为后进先出(Last In Frist Out)的线性表，简称LIFO结构</strong></p>
+<p>**栈顶(top)**：线性表允许插入的那一端。</p>
+<p>**栈底(bottom)**：不允许插入和删除的那一端，与栈顶相对。</p>
+<h3 id="2-栈的常见基本操作"><a href="#2-栈的常见基本操作" class="headerlink" title="2.栈的常见基本操作"></a>2.栈的常见基本操作</h3><p><strong>·</strong>InitStack(&amp;S)：初始化一个空栈S。</p>
+<p><strong>·</strong>StackEmpty(S)：判断一个栈是否为空，若为空则返回true否则返回false。</p>
+<p><strong>·</strong>Push(&amp;S,x)：进栈(栈的插入操作)，若栈未满则将x加入使之成为新栈顶。</p>
+<p><strong>·</strong>pop(&amp;S,&amp;x)：出栈(栈的删除操作)，若栈S非空，则弹出栈顶元素，</p>
+<p><strong>·</strong>GetTop(S,&amp;x)：读取栈顶元素，若栈S非空，则用x返回栈顶元素。</p>
+<p><strong>·</strong>DestroyStack(&amp;S)：栈销毁，并释放S所占用的空间。(‘’&amp;”表示引用调用)。</p>
+<h2 id="二、栈的顺序储存结构"><a href="#二、栈的顺序储存结构" class="headerlink" title="二、栈的顺序储存结构"></a>二、栈的顺序储存结构</h2><p>我们可以通过代码实现栈的插入、删除、判断栈是否为空、为满。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_SIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> data[MAX_SIZE];</span><br><span class="line">    <span class="type">int</span> top;</span><br><span class="line">&#125;Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化栈</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">initStack</span><span class="params">(Stack *<span class="built_in">stack</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">stack</span>-&gt;top = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查栈是否为空</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">isEmpty</span><span class="params">(Stack *<span class="built_in">stack</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">stack</span>-&gt;top == <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查是否栈满</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">isFull</span><span class="params">(Stack *<span class="built_in">stack</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">stack</span>-&gt;top == MAX_SIZE <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 入栈</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">push</span><span class="params">(Stack *<span class="built_in">stack</span>, <span class="type">int</span> value)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (isFull(<span class="built_in">stack</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈已经满，无法入栈\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">stack</span>-&gt;data[++<span class="built_in">stack</span>-&gt;top] = value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 出栈</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">pop</span><span class="params">(Stack *<span class="built_in">stack</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(<span class="built_in">stack</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈空，无法出栈\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">stack</span>-&gt;data[<span class="built_in">stack</span>-&gt;top--];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取栈顶元素</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">top</span><span class="params">(Stack *<span class="built_in">stack</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(<span class="built_in">stack</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈空，无法获取栈顶元素\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">stack</span>-&gt;data[<span class="built_in">stack</span>-&gt;top];</span><br><span class="line">&#125;</span><br><span class="line">         </span><br><span class="line"><span class="comment">// 写个简单的函数测试一下</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    Stack s1;</span><br><span class="line">    push(&amp;s1, <span class="number">10</span>);</span><br><span class="line">    push(&amp;s1, <span class="number">20</span>);</span><br><span class="line">    push(&amp;s1, <span class="number">30</span>);</span><br><span class="line">    push(&amp;s1, <span class="number">40</span>);</span><br><span class="line">    push(&amp;s1, <span class="number">50</span>);</span><br><span class="line">    <span class="type">int</span> topele;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        topele = top(&amp;s1);</span><br><span class="line">        pop(&amp;s1);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, topele);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、共享栈"><a href="#三、共享栈" class="headerlink" title="三、共享栈"></a>三、共享栈</h2><p>当我们需要用多个栈存放相同类型的数据的时候，容易会出现栈未满的情况，造成空间的浪费。<strong>共享栈</strong>就能很好的解决这个问题。</p>
+<h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h3><p>利用栈底位置相对不变的特征，可让两个顺序栈共享一个一维数组空间，将两个栈的栈底分别设置再共享栈的两端，两个栈顶向中间延伸。如图所示：</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/2021021909353762.png" alt="在这里插入图片描述"></p>
+<p><strong>需要注意的是，top0&#x3D;-1的时候1号栈为空，而top1&#x3D;MaxSize1号栈为空；当两个栈的栈顶指针相邻，即top0+1&#x3D;top1，栈满。对于0号栈来说，进栈的时候，top0先加1再赋值，出栈时先赋值后-1；对于1号栈来说，进栈的时候top1减1再赋值，出栈时先赋值后加。(具体课参考下面代码）</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 50</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> ElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	ElemType data[MAXSIZE];</span><br><span class="line">	<span class="type">int</span> top0;<span class="comment">//0号栈的栈顶指针 </span></span><br><span class="line">	<span class="type">int</span> top1;<span class="comment">//1号栈的栈顶指针 </span></span><br><span class="line">&#125;sqDoubleStack;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化共享栈</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">initSqDoubleStack</span><span class="params">(sqDoubleStack *s)</span>&#123;</span><br><span class="line">	s-&gt;top0 = <span class="number">-1</span>;</span><br><span class="line">	s-&gt;top1 = MAXSIZE;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">//共享栈进栈</span></span><br><span class="line">Status <span class="title function_">Push</span><span class="params">(sqDoubleStack *s,Elemtype e,<span class="type">int</span> stackNumber)</span>&#123; </span><br><span class="line">	<span class="comment">//将e推入双栈sqDoubleStack中指定的栈stackNumber中。sq是结构体，储存两个站的相关信息；Elemtype是元素的数据类型；stackNumber表示要操作哪一个栈(0表示栈0，1表示栈1)</span></span><br><span class="line">	<span class="keyword">if</span>(s-&gt;top0+<span class="number">1</span> == s-&gt;top1)&#123;  <span class="comment">//先判断是否栈满 </span></span><br><span class="line">		<span class="keyword">return</span> error;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(stackNumber == <span class="number">0</span>)&#123;   <span class="comment">//栈0有元素进栈 </span></span><br><span class="line">		s-&gt;data[++s-&gt;top0] = e;  <span class="comment">//若栈0则先top0+1再给数组元素赋值 </span></span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(satckNumber == <span class="number">1</span>)&#123;</span><br><span class="line">		s-&gt;data[--s-&gt;top1] = e;  <span class="comment">//若栈1则先top1-1再给数组元素赋值 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//共享栈出栈</span></span><br><span class="line"><span class="comment">//若栈不空，则删除s的栈顶元素，用e返回其值，并返回0；否则返回error </span></span><br><span class="line">Status <span class="title function_">pop</span><span class="params">(SqDoubleStack *s,ElemType *e, <span class="type">int</span> stackNumber)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(stackNumber == <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(s-&gt;top0 == <span class="number">-1</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> error;  <span class="comment">//说明栈0已经是空栈，溢出 </span></span><br><span class="line">		&#125;</span><br><span class="line">		*e = s-&gt;data[s-&gt;top0--]; <span class="comment">//将栈0的栈顶元素出栈，随后栈顶指针-1 </span></span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(stackNumber == <span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(s-&gt;top1 == MAXSIZE)&#123;</span><br><span class="line">			<span class="keyword">return</span> error;  <span class="comment">//说明栈1是空栈，溢出 </span></span><br><span class="line">		&#125;</span><br><span class="line">		*e = s-&gt;data[s-&gt;top1++];  <span class="comment">//将栈1的栈顶元素出栈，随后栈顶指针+1 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://example.com/2024/03/19/%E6%A0%88/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="as_sitesearch" value="example.com">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/CTF/">CTF</a><small>2</small></li>
+  
+    <li><a href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a><small>1</small></li>
+  
+    <li><a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/categories/%E7%AE%97%E6%B3%95/">算法</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CTF/">CTF</a><small>1</small></li>
+  
+    <li><a href="/tags/C%E8%AF%AD%E8%A8%80/">C语言</a><small>1</small></li>
+  
+    <li><a href="/tags/Re%E5%85%A5%E9%97%A8/">Re入门</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2024 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script>
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
