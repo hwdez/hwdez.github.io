@@ -101,10 +101,7 @@
 <p><img src="/../imgs/$%7Bfiilename%7D/20210219110743130.png" alt="在这里插入图片描述"></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//若栈不空，则删除s的栈顶元素，用e返回其值，并返回OK；否则返回error</span></span><br><span class="line">Status <span class="title function_">pop</span><span class="params">(LinkStack *s,ElemType *e)</span>&#123;</span><br><span class="line">    LinkStackPtr p;</span><br><span class="line">    <span class="keyword">if</span>(StackEmpty(*s))&#123;</span><br><span class="line">        <span class="keyword">return</span> error;</span><br><span class="line">    &#125;</span><br><span class="line">    *e = s-&gt;top-&gt;data;</span><br><span class="line">    p = s-&gt;top;  <span class="comment">//将栈顶节点赋值给p</span></span><br><span class="line">    s-&gt;top = s-&gt;top-&gt;next;  <span class="comment">//使得栈顶指针下移一位，指向后一节点</span></span><br><span class="line">    <span class="built_in">free</span>(p);  <span class="comment">//释放节点p</span></span><br><span class="line">    s-&gt;count--;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-
-
+<p>​        <strong>以上就是对栈的总结。如有不全或者错误的还请在评论区留言。</strong></p>
 
       
     </div>
