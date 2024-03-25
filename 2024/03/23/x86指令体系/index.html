@@ -3,14 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CTF之Reverse入门 | Hexo</title>
+  <title>x86指令体系 | Hexo</title>
   <meta name="author" content="John Doe">
   
-  <meta name="description" content="Reverse概述">
+  <meta name="description" content="一、寄存器组首先，寄存器是什么？
+
+我们通过CPU构造来引入。
+这是CPU内部的构造。从逻辑上，CPU可以分为三个模块，分别是控制单元、运算单元和
+存储单元，三者由CPU内部总线连接起来。
+可以将CPU工作分为5个阶段：取指令、指令译码、执行指令、访存取数、结果写回。
+取指令：将内存中的指令读取到C">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="CTF之Reverse入门"/>
+  <meta property="og:title" content="x86指令体系"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -46,38 +52,43 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-CTF之Reverse入门" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-x86指令体系" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-03-12T13:02:22.000Z"><a href="/2024/03/12/CTF%E4%B9%8BReverse%E5%85%A5%E9%97%A8/">2024-03-12</a></time>
+        <time class="dt-published" datetime="2024-03-23T12:42:47.000Z"><a href="/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB/">2024-03-23</a></time>
       
       
   
-    <h1 class="p-name title" itemprop="headline name">CTF之Reverse入门</h1>
+    <h1 class="p-name title" itemprop="headline name">x86指令体系</h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h1 id="Reverse概述"><a href="#Reverse概述" class="headerlink" title="Reverse概述"></a>Reverse概述</h1>  <span id="more"></span>
+        <span id="more"></span>
 
-<p><strong>注意，该文章只争对，Windows和Linux平台下的逆向</strong></p>
-<p>​        Reverse即软件逆向工程，是对编译成型的二进制程序进行代码、 逻辑和功能分析的过程。在CTF比赛中，Reverse类型的题目主要考察选手的软件静态分析和动态调试能力，要求选手有较强的程序代码分析能力，同时对反调试、代码混淆等对抗技术有一定的了解。</p>
-<p>​        首先我们先来了解一下编译的过程。编译大致分为四个过程：预处理、编译、汇编、链接。</p>
-<h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4><p>​        在这个过程中，编译器将对所有的预处理命令进行文本操作，比如插入<code>include&lt;头文件&gt;</code></p>
-<p>中的内容、<code>define宏定义</code>替换文件中的符号等等。同时还有删除注释，添加行号，以及所需要的其他标识符。</p>
-<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><p>​        生成汇编语言。</p>
-<h4 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h4><p>​        将汇编指令转为机器代码，也就是二进制文件。</p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>​        链接库文件，生成<code>.exe</code>文件。</p>
-<h3 id="逆向分析的主要分析方法"><a href="#逆向分析的主要分析方法" class="headerlink" title="逆向分析的主要分析方法"></a>逆向分析的主要分析方法</h3><p>​        将二进制代码转为汇编代码的过程中容易缺失一些信息。可以通过逆向分析的方法还原以上信息。逆向分析的方法主要有两种：静态分析和动态分析。这里简单介绍这两种分析方法。</p>
-<p>​        静态分析</p>
-<p>​        主要是在不执行代码的情况下，只分析代码文件的外部特征，比如文件类型分析和静态反汇编、反编译。</p>
-<p>​        动态分析</p>
-<p>​        在程序文件执行的过程中对代码进行分析，通过调试来分析代码、获取内存的状态。</p>
-<p>​       </p>
+<h2 id="一、寄存器组"><a href="#一、寄存器组" class="headerlink" title="一、寄存器组"></a>一、寄存器组</h2><p><strong>首先，寄存器是什么？</strong></p>
+<p><img src="/../imgs/$%7Bfiilename%7D/c857d09010d16b354e1a96a6d562aba5.jpeg" alt="img"></p>
+<p><strong>我们通过CPU构造来引入。</strong></p>
+<p>这是CPU内部的构造。从逻辑上，CPU可以分为三个模块，分别是控制单元、运算单元和</p>
+<p>存储单元，三者由CPU内部总线连接起来。</p>
+<p>可以将CPU工作分为5个阶段：取指令、指令译码、执行指令、访存取数、结果写回。</p>
+<p><code>取指令</code>：将内存中的指令读取到CPU中寄存器，程序寄存器用于存储下一条指令所在的地址。</p>
+<p><code>指令译码</code>：指令译码器按照预定的指令格式，对取回的指令进行拆分和解释，识别区分不同指令类别以及各种获取操作数的方法。</p>
+<p><code>执行指令</code>：完成指令中各种操作，实现指令具体的操作。</p>
+<p><code>访问取数</code>：根据指令的需要，可能需要从内存中提取数据，所以需要根据指令地址，得到操作数在主存中的地址，并从主存中获取该操作数用于运算。</p>
+<p><code>结果写回</code>：将执行指令阶段的运行结果数据写回到CPU的内部寄存器中，一边后续的指令快速读取。</p>
+<hr>
+<p><strong>可以看出，CPU工作的过程中离不开寄存器，它具有存储数据的功能，接下来我们详细介绍</strong></p>
+<p><img src="/../imgs/$%7Bfiilename%7D/0f1bf71cc3294da0ee33c124f0ee361f.jpeg" alt="img"></p>
+<p>寄存器在读取数据的速度是非常快的。我们以intel 8086处理器为例分析，8086</p>
+<p>处理器是x86架构的前身。在8086CPU中，地址底线达到20根，最大寻址能力可以达到2^20次幂也就是1MB的寻址能力。</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/3b52a747b16c4d66aee5036534e3a557.png" alt="8086的内部结构"></p>
+<p><img src="/../imgs/$%7Bfiilename%7D/da9888f5ba6a4b86b362279e262c5ca7.png" alt="8086的寄存器"></p>
+<p>在8086架构中，所有内部寄存器、nei’bu</p>
 
       
     </div>
@@ -86,13 +97,13 @@
         
   
   <div class="categories">
-    <a href="/categories/CTF/">CTF</a>
+    <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/Re%E5%85%A5%E9%97%A8/">Re入门</a>
+    <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a>
   </div>
 
       
@@ -117,7 +128,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://example.com/2024/03/12/CTF%E4%B9%8BReverse%E5%85%A5%E9%97%A8/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://example.com/2024/03/23/x86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
