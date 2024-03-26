@@ -73,9 +73,9 @@
 <h2 id="一、寄存器组"><a href="#一、寄存器组" class="headerlink" title="一、寄存器组"></a>一、寄存器组</h2><p><strong>首先，寄存器是什么？</strong></p>
 <p><img src="/../imgs/$%7Bfiilename%7D/c857d09010d16b354e1a96a6d562aba5.jpeg" alt="img"></p>
 <p><strong>我们通过CPU构造来引入。</strong></p>
-<p>这是CPU内部的构造。从逻辑上，CPU可以分为三个模块，分别是控制单元、运算单元和</p>
-<p>存储单元，三者由CPU内部总线连接起来。</p>
-<p>可以将CPU工作分为5个阶段：取指令、指令译码、执行指令、访存取数、结果写回。</p>
+<p>这是CPU内部的构造。从逻辑上，CPU可以分为三个模块，分别是<code>控制单元</code>、<code>运算单元</code>和</p>
+<p><code>存储单元</code>，三者由CPU内部总线连接起来。</p>
+<p>可以将CPU工作分为5个阶段：<code>取指令</code>、<code>指令译码</code>、<code>执行指令</code>、<code>访存取数</code>、<code>结果写回</code>。</p>
 <p><code>取指令</code>：将内存中的指令读取到CPU中寄存器，程序寄存器用于存储下一条指令所在的地址。</p>
 <p><code>指令译码</code>：指令译码器按照预定的指令格式，对取回的指令进行拆分和解释，识别区分不同指令类别以及各种获取操作数的方法。</p>
 <p><code>执行指令</code>：完成指令中各种操作，实现指令具体的操作。</p>
@@ -88,7 +88,26 @@
 <p>处理器是x86架构的前身。在8086CPU中，地址底线达到20根，最大寻址能力可以达到2^20次幂也就是1MB的寻址能力。</p>
 <p><img src="/../imgs/$%7Bfiilename%7D/3b52a747b16c4d66aee5036534e3a557.png" alt="8086的内部结构"></p>
 <p><img src="/../imgs/$%7Bfiilename%7D/da9888f5ba6a4b86b362279e262c5ca7.png" alt="8086的寄存器"></p>
-<p>在8086架构中，所有内部寄存器、nei’bu</p>
+<p>从这幅图中，我们大概可以将寄存器分为通用寄存器，段寄存器，控制寄存器。</p>
+<hr>
+<h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><p>通用寄存器在处理器中数量较多，使用频率较高，具有多种用途。通用寄存器主要分为三种：数据寄存器，变址寄存器，指针寄存器。还有标志寄存器和指令指针。</p>
+<p>8086处理器有8个16位通用寄存器：AX、BX、CX、DX、SI、DI、BP、SP</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/ff7d7db950944ef38977bf43257c2174.png" alt="在这里插入图片描述"></p>
+<p>前四个通用寄存器主要是用来储存数据。8086CPU的上一代是8080，8080是一类8位的CPU，为了保证兼容性，8086在8080上做了小的修改，这些都是由两个独立的8位寄存器组成。<img src="/../imgs/$%7Bfiilename%7D/1539d19707ef279a717f8c596a5efc3c.jpeg" alt="img"></p>
+<p><strong>以AX为例，AL是AX的低8位，AH是AX的高八位。同理可得，EAX、EBX、ECX、EDX这些32位数据寄存器中，AX、BX、CX、DX分别是对应的低16位。</strong></p>
+<p>8086可以存储两种类型的数据：</p>
+<p>1、字节：一个字节由8bit组成。</p>
+<p>2、字：字是由指令集或处理器硬件作为单元处理的固定大小的数据，对于intel来说，一个字长就是两个字节。对于不同指令集架构来说，计算机一次能处理的数据不同的，大小用字体现。</p>
+<hr>
+<h4 id="AX寄存器"><a href="#AX寄存器" class="headerlink" title="AX寄存器"></a>AX寄存器</h4><p>AX寄存器又叫做累加器，主要用作算数，逻辑运算，以及与外设传递信息。</p>
+<p><strong>AX寄存器相比于其他的寄存器又有点特殊：</strong></p>
+<p><strong>DIV 是 8086 CPU 中的除法指令。</strong><br><strong>MUL 是 8086 CPU 中的乘法指令。</strong></p>
+<h4 id="BX寄存器"><a href="#BX寄存器" class="headerlink" title="BX寄存器"></a>BX寄存器</h4><p>BX寄存器是用来寻址，即寻址物理内存地址。BX存储基址地址，后结合偏移量有效定位具体的内存地址。实例代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ebx,0x1000 ;将基址地址存储到ebx寄存器中</span><br><span class="line">mov esi,2  ;将偏移量(数组索引)存储到esi寄存器</span><br><span class="line">mov eax,[ebx + esi*2]  ;访问数组元素，假设每个元素占两个字节</span><br></pre></td></tr></table></figure>
+
+<h4 id="CX寄存器"><a href="#CX寄存器" class="headerlink" title="CX寄存器"></a>CX寄存器</h4><p>CX寄存器通常用于存储循环计数器(Loop Counter)。在汇编语言编程中，用CX存储循环计数，用代码举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">    mov eax,2</span><br><span class="line">    add eax,eax</span><br><span class="line">    </span><br><span class="line">    mov eax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
 
       
     </div>
