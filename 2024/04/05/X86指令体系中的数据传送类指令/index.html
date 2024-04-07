@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>数理统计 | Hexo</title>
+  <title>X86指令体系中的数据传送类指令 | Hexo</title>
   <meta name="author" content="John Doe">
   
-  <meta name="description" content="数理统计​        数理统计的任务是以概率论为基础，有效收集、整理和分析受到随机性影响的数据，对考察的问题作出估计、推断和预测、从而为采取决策和行动提供意见。">
+  <meta name="description" content="MOV指令MOV指令将源操作数复制到目的的操作数。格式如下：
+ MOV destination,source
+其中，目的操作数的内容会发生改变，而源操作数不会改变。这种数据从右到左的移动与C++或Java中的赋值语句相似。
+在几乎所有的汇编语言指令中，左边的操作数是目标操作数，而右边的操作数是源操作">
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="数理统计"/>
+  <meta property="og:title" content="X86指令体系中的数据传送类指令"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -46,29 +49,34 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-数理统计" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-X86指令体系中的数据传送类指令" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-03-14T10:21:36.000Z"><a href="/2024/03/14/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">2024-03-14</a></time>
+        <time class="dt-published" datetime="2024-04-05T15:56:53.000Z"><a href="/2024/04/05/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E7%B1%BB%E6%8C%87%E4%BB%A4/">2024-04-05</a></time>
       
       
   
-    <h1 class="p-name title" itemprop="headline name">数理统计</h1>
+    <h1 class="p-name title" itemprop="headline name">X86指令体系中的数据传送类指令</h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h1 id="数理统计"><a href="#数理统计" class="headerlink" title="数理统计"></a>数理统计</h1><p>​        数理统计的任务是以概率论为基础，有效收集、整理和分析受到随机性影响的数据，对考察的问题作出估计、推断和预测、从而为采取决策和行动提供意见。</p>
-<span id="more"></span>
+        <span id="more"></span>
 
-<h2 id="统计基本概念"><a href="#统计基本概念" class="headerlink" title="统计基本概念"></a>统计基本概念</h2><h3 id="一、总体"><a href="#一、总体" class="headerlink" title="一、总体"></a>一、总体</h3><p>​       统计指标X</p>
-<h3 id="二、个体"><a href="#二、个体" class="headerlink" title="二、个体"></a>二、个体</h3><p>​        X的一次观测值</p>
-<h3 id="三-、样本"><a href="#三-、样本" class="headerlink" title="三 、样本"></a>三 、样本</h3><p>​        从总体中抽取n个个体称为容量为x的样本</p>
-<h2 id="参数估计和假设检验"><a href="#参数估计和假设检验" class="headerlink" title="参数估计和假设检验"></a>参数估计和假设检验</h2><h3 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h3><p>​       对于正态分布来说，μ跟σ未知。估计方式有两种，点估计和区间估计。前者精确度高但可信度低，后者相反。     </p>
+<h3 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h3><p>MOV指令将源操作数复制到目的的操作数。格式如下：</p>
+<p> <code>MOV destination,source</code></p>
+<p>其中，目的操作数的内容会发生改变，而源操作数不会改变。这种数据从右到左的移动与C++或Java中的赋值语句相似。</p>
+<p>在几乎所有的汇编语言指令中，左边的操作数是<strong>目标操作数</strong>，而右边的操作数是<strong>源操作数</strong>。只要按照如下原则，MOV指令使用操作数是非常灵活的。        </p>
+<p><code>MOV reg,reg</code></p>
+<p><code>MOV mem,reg</code></p>
+<p><code>MOV reg mem</code></p>
+<p><code>MOV mem imm</code></p>
+<p><code>MOV reg imm</code></p>
+<p><strong>内存到内存</strong>  单条MOV指令不能直接将数据从一个内存位置传送到另一个内存位置。相反，在将操作数的值赋值给内存操作数之前，必须先将该数值传从给另一个寄存器：</p>
 
       
     </div>
@@ -77,13 +85,13 @@
         
   
   <div class="categories">
-    <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+    <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+    <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a>
   </div>
 
       
@@ -108,7 +116,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://example.com/2024/03/14/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://example.com/2024/04/05/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E7%B1%BB%E6%8C%87%E4%BB%A4/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
