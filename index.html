@@ -45,6 +45,38 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-X86指令体系中数据的存储及调用" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2024-04-09T14:46:21.000Z"><a href="/2024/04/09/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8F%8A%E8%B0%83%E7%94%A8/">2024-04-09</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2024/04/09/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8F%8A%E8%B0%83%E7%94%A8/">X86指令体系中数据的存储及调用</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
   <article id="post-线性表" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
@@ -107,7 +139,15 @@
 <p><strong>2、顺序表的优缺点</strong></p>
 <p>优点：物理地址上连续，很好查找元素。</p>
 <p>缺点：插入，删除操作需要移动大量元素。</p>
-<h3 id="链式存储"><a href="#链式存储" class="headerlink" title="链式存储"></a>链式存储</h3><h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4>
+<h3 id="链式存储"><a href="#链式存储" class="headerlink" title="链式存储"></a>链式存储</h3><p>用<strong>一组任意的存储单元</strong>存储线性表中的数据元素。</p>
+<p>链表通过在<u>每个结点增加指针域</u>，由指针将线性表的n个结点<strong>按其逻辑次序</strong>链接在一起。</p>
+<p>链表结点 &#x3D; 数据域(data) + 指针域(prior &amp; next);</p>
+<p>根据指针域的数目可分为<u>单链表</u>和<u>双链表</u>。</p>
+<p><strong>单链表</strong></p>
+<p><img src="/../imgs/$%7Bfiilename%7D/%7D6L%60F3S@X%7D5XLQUPS4PMOYA.png" alt="img"></p>
+<p><strong>双链表</strong></p>
+<p><img src="/../imgs/$%7Bfiilename%7D/(3RS4C%7DXV%7B9@W_H@QXN)G%25B.png" alt="img"></p>
+
       
     </div>
     <footer>
@@ -174,7 +214,9 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h3 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h3><p>MOV指令将源操作数复制到目的的操作数。格式如下：</p>
+        <span id="more"></span>
+
+<h3 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h3><p>MOV指令将源操作数复制到目的的操作数。格式如下：</p>
 <p> <code>MOV destination,source</code></p>
 <p>其中，目的操作数的内容会发生改变，而源操作数不会改变。这种数据从右到左的移动与C++或Java中的赋值语句相似。</p>
 <p>在几乎所有的汇编语言指令中，左边的操作数是<strong>目标操作数</strong>，而右边的操作数是<strong>源操作数</strong>。只要按照如下原则，MOV指令使用操作数是非常灵活的。        </p>
@@ -183,6 +225,7 @@
 <p><code>MOV reg mem</code></p>
 <p><code>MOV mem imm</code></p>
 <p><code>MOV reg imm</code></p>
+<p><u>(reg表示的是通用寄存器；mem表示内存单元；imm是立即数；seg表示的是段寄存器)</u></p>
 <p><strong>内存到内存</strong>  单条MOV指令不能直接将数据从一个内存位置传送到另一个内存位置。相反，在将操作数的值赋值给内存操作数之前，必须先将该数值传从给另一个寄存器：</p>
 
       
@@ -280,16 +323,16 @@
 <p>前四个通用寄存器主要是用来储存数据。8086CPU的上一代是8080，8080是一类8位的CPU，为了保证兼容性，8086在8080上做了小的修改，这些都是由两个独立的8位寄存器组成。<img src="/../imgs/$%7Bfiilename%7D/1539d19707ef279a717f8c596a5efc3c.jpeg" alt="img"></p>
 <p><strong>以AX为例，AL是AX的低8位，AH是AX的高八位。同理可得，EAX、EBX、ECX、EDX这些32位数据寄存器中，AX、BX、CX、DX分别是对应的低16位。</strong></p>
 <p>8086可以存储两种类型的数据：</p>
-<p>1、字节：一个字节由8bit组成。</p>
-<p>2、字：字是由指令集或处理器硬件作为单元处理的固定大小的数据，对于intel来说，一个字长就是两个字节。对于不同指令集架构来说，计算机一次能处理的数据不同的，大小用字体现。</p>
+<p>1、字节(BYTE)：一个字节由8bit组成。</p>
+<p>2、字(WORD)：字是由指令集或处理器硬件作为单元处理的固定大小的数据，对于intel来说，一个字长就是两个字节。对于不同指令集架构来说，计算机一次能处理的数据不同的，大小用字体现。</p>
 <hr>
 <h4 id="AX寄存器"><a href="#AX寄存器" class="headerlink" title="AX寄存器"></a>AX寄存器</h4><p>AX寄存器又叫做累加器，主要用作算数，逻辑运算，以及与外设传递信息。</p>
 <p><strong>AX寄存器相比于其他的寄存器又有点特殊：</strong></p>
 <p><strong>DIV 是 8086 CPU 中的除法指令。</strong><br><strong>MUL 是 8086 CPU 中的乘法指令。</strong></p>
-<h4 id="BX寄存器"><a href="#BX寄存器" class="headerlink" title="BX寄存器"></a>BX寄存器</h4><p>BX寄存器是用来寻址，即寻址物理内存地址。BX存储基址地址，后结合偏移量有效定位具体的内存地址。实例代码如下：</p>
+<h4 id="BX寄存器"><a href="#BX寄存器" class="headerlink" title="BX寄存器"></a>BX寄存器</h4><p>BX寄存器是用来寻址，即寻址物理内存地址。在计算存储器地址时，它经常用作基址寄存器；在XLAT指令中提供被查表格中源操作数的间接地址；BX存储基址地址，后结合偏移量有效定位具体的内存地址。实例代码如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ebx,0x1000 ;将基址地址存储到ebx寄存器中</span><br><span class="line">mov esi,2  ;将偏移量(数组索引)存储到esi寄存器</span><br><span class="line">mov eax,[ebx + esi*2]  ;访问数组元素，假设每个元素占两个字节</span><br></pre></td></tr></table></figure>
 
-<h4 id="CX寄存器"><a href="#CX寄存器" class="headerlink" title="CX寄存器"></a>CX寄存器</h4><p>CX寄存器通常用于存储循环计数器(Loop Counter)。在汇编语言编程中，用CX存储循环计数，用代码举例：</p>
+<h4 id="CX寄存器"><a href="#CX寄存器" class="headerlink" title="CX寄存器"></a>CX寄存器</h4><p>CX寄存器通常用于存储循环计数器(Loop Counter)。在串操作时用作串长计数器；在汇编语言编程中，用CX存储循环计数，用代码举例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code  ;将代码段与代码寄存器CS相关联，使汇编器知道接下来的代码放在叫做code的代码段中</span><br><span class="line"></span><br><span class="line">code segment  ;定义一个代码段的开始</span><br><span class="line">    mov eax,2  ;将2存储再eax寄存器中</span><br><span class="line">    add eax,eax  ;将eax中数组*2然后再存入eax中</span><br><span class="line">    </span><br><span class="line">    mov eax,4c00H  ;将立即数4c00H(16进制)存储到eax中，覆盖之前计算到的值4</span><br><span class="line">    int 21H  ;触发DOS中断21H，根据中断调用号4c00H</span><br><span class="line">code ends  ;代码段结束标记</span><br><span class="line">end  ;程序结束标记</span><br></pre></td></tr></table></figure>
 
 <p>如此来看，当我们想计算2的几百次幂的时候，重复<code>add eax,eax</code>这串代码显然不显示，这时候就要用到CX寄存器的功能了。</p>
@@ -298,7 +341,41 @@
 <p>在这个程序中，但执行到loop指令时，CPU会执行两件事：</p>
 <p>1、计数器减1</p>
 <p>2、判断ECX中从值是否为0，为0则结束循环，不为0则继续下列指令</p>
-<h4 id="DX"><a href="#DX" class="headerlink" title="DX"></a>DX</h4><p>DX寄存器又叫做<strong>数据寄存器</strong>，在寄存器间接寻址中的I&#x2F;O指令中存放I&#x2F;O端口的地址</p>
+<h4 id="DX寄存器"><a href="#DX寄存器" class="headerlink" title="DX寄存器"></a>DX寄存器</h4><p>DX寄存器又叫做<strong>数据寄存器</strong>，在寄存器间接寻址中的I&#x2F;O指令中存放I&#x2F;O端口的地址；在字乘时存放积的高字节；在字除时提供被除数的高位，并存放余数。</p>
+<hr>
+<h3 id="指针寄存器"><a href="#指针寄存器" class="headerlink" title="指针寄存器"></a>指针寄存器</h3><h4 id="BP寄存器"><a href="#BP寄存器" class="headerlink" title="BP寄存器"></a>BP寄存器</h4><p>BP寄存器(Base)又叫做<strong>基址指针寄存器</strong>。用来<strong>指示堆栈中某个数据区的偏移地址</strong>——基地址，<strong>与SS堆栈段寄存器一起形成堆栈中某个存储单元的物理地址</strong>。BP可以对堆栈中任意位置的数据进行操作，<u>但不具备SP始终指向堆栈栈顶的含义</u>。</p>
+<p>下面用代码的方式体现bp在寻址中的作用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ebp,0</span><br><span class="line">mov eax,[ebp]  ;将SS:bp代表的内存单元移入eax中</span><br><span class="line">mov eax,cs:[ebp]  ;将CS:[bp]代表的内存单元移入eax中</span><br></pre></td></tr></table></figure>
+
+<p>bp不是数据寄存器，也就意味着其<u>不能分割成2个独立的8位寄存器使用</u>。</p>
+<p>当<strong>以[…]的方式访问内存单元并且使用bp</strong>的，那么如果在指令中<strong>没有明确或者说显示的给出段地址</strong>时，**段地址则使用默认的SS寄存器中的值(BX,SI,DI会默认使用DS寄存器)**，比如：</p>
+<p><strong>DS:[BP]<strong>明确给出了</strong>段地址位于DS中</strong>，所以这里代表的<strong>内存单元即是段地址DS</strong>，<strong>偏移量为BP寄存器中的值的内存单元</strong>。</p>
+<h4 id="SP寄存器"><a href="#SP寄存器" class="headerlink" title="SP寄存器"></a>SP寄存器</h4><p>SP寄存器又叫做<strong>堆栈指针寄存器</strong>。堆栈是指<u>内存中开辟一个专用的数据存储区</u>，它具有”<strong>先进后出</strong>“的存储特性。主要用来<u>保护程序的现场和断点</u>，在<u>子程序中调用和中断操作</u>中使用。</p>
+<p>SP用来<strong>指出当前堆栈的栈顶的位置</strong>，在堆栈指令操作时，由它<strong>给出入栈或出栈的数据在栈中的偏移地址</strong>，<strong>与SS堆栈段寄存器一起形栈顶存储单元的物理地址</strong>。</p>
+<p>在8086系统中，堆栈是由<strong>高地址向低地址端扩展</strong>，即<strong>入栈时SP减2</strong>.随着入栈数据的增多，<u>堆栈扩展，SP值减小</u>。</p>
+<hr>
+<h3 id="变址寄存器"><a href="#变址寄存器" class="headerlink" title="变址寄存器"></a>变址寄存器</h3><p>顾名思义，变址的含义是<strong>内存地址会变动</strong>的，也就是说变址寄存器中存放会变动的内存地址。分为<strong>SI</strong>和<strong>DI</strong>。</p>
+<p>这两个寄存器与DS数据段寄存器一起用来确定数据段中某一存储单元的物理地址。</p>
+<p>这两个寄存器都有<u>自动增量和自动减量</u>功能，用于变址很方便。</p>
+<p>在串处理指令中，SI和DI作为隐含的源变址寄存器和目的变址寄存器。此时<strong>SI和DS联用</strong>，<strong>DI和ES附加数据段寄存器联用</strong>，分别达到在<u>数据段中和在附加段中寻址</u>的目的。</p>
+<h4 id="SI寄存器"><a href="#SI寄存器" class="headerlink" title="SI寄存器"></a>SI寄存器</h4><p>SI又称<strong>源变址寄存器</strong>，通常存放<strong>要处理</strong>的数据的内存的地址。</p>
+<h4 id="DI寄存器"><a href="#DI寄存器" class="headerlink" title="DI寄存器"></a>DI寄存器</h4><p>DI又称<strong>目的变址寄存器</strong>，通常存放<strong>处理后</strong>的数据的内存地址。</p>
+<p>下列代码来实现SI和DI的寻址操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mov esi,0  ;初始化偏移地址为0</span><br><span class="line">mov eax,[esi]  ;初始化偏移地址为0</span><br><span class="line">mov eax,ds:[esi]  ;将段地址ds偏移地址为si的内存单元中的值移入ax中</span><br><span class="line">mov eax,ss:[esi]  ;将段地址为ss偏移地址为si中内存单元中的值移入ax中</span><br><span class="line"></span><br><span class="line">mov edi,0  ;初始化偏移地址为0</span><br><span class="line">mov eax,[edi]  ;初始化偏移地址为0</span><br><span class="line">mov eax,ds[edi]  ;将段地址ds偏移地址为di的内存单元中的值移入ax中</span><br><span class="line">mov eax,ss:[edi]  ;将段地址为ss偏移地址为di中内存单元中的值移入ax中</span><br></pre></td></tr></table></figure>
+
+<h3 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h3><p>段寄存器主要有**CS(Code Segment Register，代码段寄存器)<strong>、</strong>SS(Stack Segment Register，堆栈段寄存器)<strong>、</strong>DS(Data Segment Register，数据段寄存器)<strong>、</strong>ES(Extra Segment Register)**，附加段寄存器)四个16位寄存器。</p>
+<h4 id="SS寄存器"><a href="#SS寄存器" class="headerlink" title="SS寄存器"></a>SS寄存器</h4><p>SS(Stack Segment)又叫做<strong>堆栈寄存器</strong>。用于存放堆栈段的段地址，只要和SP(Stack Point)<strong>堆栈指针寄存器</strong>联用对堆栈进行操作。在堆栈指令中会详细讲解这段指令的使用方法。</p>
+<h4 id="DS寄存器"><a href="#DS寄存器" class="headerlink" title="DS寄存器"></a>DS寄存器</h4><p>DS(Data Segment)又叫做数据寄存器。用于指出当前程序使用的数据所存放段的最低地址，即存放数据段的段基址。这边制作简单的介绍，对于数据在程序中是如何存储的会额外写一篇博客。</p>
+<h4 id="ES寄存器"><a href="#ES寄存器" class="headerlink" title="ES寄存器"></a>ES寄存器</h4><p>ES(Extra Segment)又叫做附加段寄存器。这附加段寄存器用法比较多：在串操作指令中目的串所在的段；同时也可以当作数据段存放数据所在的段。</p>
+<h4 id="CS寄存器"><a href="#CS寄存器" class="headerlink" title="CS寄存器"></a>CS寄存器</h4><p>CS(Code Segment)又称<strong>代码段寄存器</strong>。</p>
+<p>顾名思义，该代码段是用来存放<strong>当前正在运行的程序代码所在段的段基址</strong>，表示当前指令代码可以从该段寄存器指定的存储器段中取得，<strong>相应的偏移量由IP提供</strong>。</p>
+<h3 id="控制寄存器"><a href="#控制寄存器" class="headerlink" title="控制寄存器"></a>控制寄存器</h3><p>控制寄存器分为两个16位的寄存器IP和PSW</p>
+<h4 id="IP寄存器"><a href="#IP寄存器" class="headerlink" title="IP寄存器"></a>IP寄存器</h4><p>IP(Instruction Pointer)为<strong>指令指针寄存器</strong>，它用来存放代码段的偏移地址。在程序运行的过程中，它<u>始终指向下一条指令的首地址</u>。</p>
+<p><strong>它与段寄存器CS联合使用确定下一条指令的物理地址</strong>。当这一地址送到存储器后，控制器可以获取下一条要执行的指令，而控制器一旦<u>取得这条指令就马上修改IP的内容</u>，使它<u>指向下一条指令的首地址</u>。</p>
+<h4 id="PSW寄存器"><a href="#PSW寄存器" class="headerlink" title="PSW寄存器"></a>PSW寄存器</h4><p>PSW(Program Status Word)又叫做程序状态字寄存器，或叫做标志寄存器(FLAGS)。这是一个存放状态(或称条件码)标志、控制标志的寄存器。</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/015b6bc2986d42ed91fb76a1ffb30a41.png" alt="请添加图片描述">分为6个状态标志位和3个控制标志位</p>
+<p>6个状态标志位:CF(Carry Flag)、AF(Auxiliary Carry Flag)、OF(Overflow Flag)、ZF(Zero Flag)、SF(Sign Flag)、PF(Parity Flag)</p>
+<p>3个控制方向位:DF(Direction Flag)、IF(Interrupt Flag)、TF(Trap Flag)</p>
 
       
     </div>
@@ -447,42 +524,6 @@
         
           <div class="alignleft">
             <a href="/2024/03/14/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article id="post-CTF之Reverse入门" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2024-03-12T13:02:22.000Z"><a href="/2024/03/12/CTF%E4%B9%8BReverse%E5%85%A5%E9%97%A8/">2024-03-12</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2024/03/12/CTF%E4%B9%8BReverse%E5%85%A5%E9%97%A8/">CTF之Reverse入门</a></h1>
-  
-
-    </header>
-    <div class="e-content entry" itemprop="articleBody">
-      
-        <h1 id="Reverse概述"><a href="#Reverse概述" class="headerlink" title="Reverse概述"></a>Reverse概述</h1>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2024/03/12/CTF%E4%B9%8BReverse%E5%85%A5%E9%97%A8/#more" class="more-link">Read More</a>
           </div>
         
         
