@@ -131,8 +131,8 @@
 <p>这两个寄存器与DS数据段寄存器一起用来确定数据段中某一存储单元的物理地址。</p>
 <p>这两个寄存器都有<u>自动增量和自动减量</u>功能，用于变址很方便。</p>
 <p>在串处理指令中，SI和DI作为隐含的源变址寄存器和目的变址寄存器。此时<strong>SI和DS联用</strong>，<strong>DI和ES附加数据段寄存器联用</strong>，分别达到在<u>数据段中和在附加段中寻址</u>的目的。</p>
-<h4 id="SI寄存器"><a href="#SI寄存器" class="headerlink" title="SI寄存器"></a>SI寄存器</h4><p>SI又称<strong>源变址寄存器</strong>，通常存放<strong>要处理</strong>的数据的内存的地址。</p>
-<h4 id="DI寄存器"><a href="#DI寄存器" class="headerlink" title="DI寄存器"></a>DI寄存器</h4><p>DI又称<strong>目的变址寄存器</strong>，通常存放<strong>处理后</strong>的数据的内存地址。</p>
+<h4 id="SI寄存器"><a href="#SI寄存器" class="headerlink" title="SI寄存器"></a>SI寄存器</h4><p>SI(Source Index)又称<strong>源变址寄存器</strong>，通常存放<strong>要处理</strong>的数据的内存的地址。</p>
+<h4 id="DI寄存器"><a href="#DI寄存器" class="headerlink" title="DI寄存器"></a>DI寄存器</h4><p>DI(Destination Index)又称<strong>目的变址寄存器</strong>，通常存放<strong>处理后</strong>的数据的内存地址。</p>
 <p>下列代码来实现SI和DI的寻址操作</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mov esi,0  ;初始化偏移地址为0</span><br><span class="line">mov eax,[esi]  ;初始化偏移地址为0</span><br><span class="line">mov eax,ds:[esi]  ;将段地址ds偏移地址为si的内存单元中的值移入ax中</span><br><span class="line">mov eax,ss:[esi]  ;将段地址为ss偏移地址为si中内存单元中的值移入ax中</span><br><span class="line"></span><br><span class="line">mov edi,0  ;初始化偏移地址为0</span><br><span class="line">mov eax,[edi]  ;初始化偏移地址为0</span><br><span class="line">mov eax,ds[edi]  ;将段地址ds偏移地址为di的内存单元中的值移入ax中</span><br><span class="line">mov eax,ss:[edi]  ;将段地址为ss偏移地址为di中内存单元中的值移入ax中</span><br></pre></td></tr></table></figure>
 
@@ -145,10 +145,27 @@
 <h3 id="控制寄存器"><a href="#控制寄存器" class="headerlink" title="控制寄存器"></a>控制寄存器</h3><p>控制寄存器分为两个16位的寄存器IP和PSW</p>
 <h4 id="IP寄存器"><a href="#IP寄存器" class="headerlink" title="IP寄存器"></a>IP寄存器</h4><p>IP(Instruction Pointer)为<strong>指令指针寄存器</strong>，它用来存放代码段的偏移地址。在程序运行的过程中，它<u>始终指向下一条指令的首地址</u>。</p>
 <p><strong>它与段寄存器CS联合使用确定下一条指令的物理地址</strong>。当这一地址送到存储器后，控制器可以获取下一条要执行的指令，而控制器一旦<u>取得这条指令就马上修改IP的内容</u>，使它<u>指向下一条指令的首地址</u>。</p>
-<h4 id="PSW寄存器"><a href="#PSW寄存器" class="headerlink" title="PSW寄存器"></a>PSW寄存器</h4><p>PSW(Program Status Word)又叫做程序状态字寄存器，或叫做标志寄存器(FLAGS)。这是一个存放状态(或称条件码)标志、控制标志的寄存器。</p>
+<h4 id="PSW寄存器"><a href="#PSW寄存器" class="headerlink" title="PSW寄存器"></a>PSW寄存器</h4><p>PSW(Program Status Word)又叫做<strong>程序状态字寄存器</strong>，或叫做**标志寄存器(FLAGS)**。这是一个存放状态(或称条件码)标志、控制标志的寄存器。</p>
 <p><img src="/../imgs/$%7Bfiilename%7D/015b6bc2986d42ed91fb76a1ffb30a41.png" alt="请添加图片描述">分为6个状态标志位和3个控制标志位</p>
-<p>6个状态标志位:CF(Carry Flag)、AF(Auxiliary Carry Flag)、OF(Overflow Flag)、ZF(Zero Flag)、SF(Sign Flag)、PF(Parity Flag)</p>
-<p>3个控制方向位:DF(Direction Flag)、IF(Interrupt Flag)、TF(Trap Flag)</p>
+<p>6个状态标志位:**CF(Carry Flag)<strong>、</strong>AF(Auxiliary Carry Flag)<strong>、</strong>OF(Overflow Flag)<strong>、</strong>ZF(Zero Flag)<strong>、</strong>SF(Sign Flag)<strong>、</strong>PF(Parity Flag)**。</p>
+<p>3个控制方向位:**DF(Direction Flag)<strong>、</strong>IF(Interrupt Flag)<strong>、</strong>TF(Trap Flag)**。</p>
+<p>下面将详细介绍每个标志位的用途及表现方式。</p>
+<h5 id="OF-Overflow-Flag"><a href="#OF-Overflow-Flag" class="headerlink" title="OF(Overflow Flag)"></a>OF(Overflow Flag)</h5><p>OF是<strong>溢出标志</strong>。当我们在进行<strong>有符号数的运算</strong>的时候，结果超出机器能表示的范围就叫溢出(<strong>8位大于+127或小于-128、16位小于-32768或大于+32767</strong>)，此时<strong>OF的值置1，否则置0</strong>。</p>
+<p>溢出时，表明计算结果不对，一般通过<strong>溢出中断处理</strong>加以解决。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al,98</span><br><span class="line">add al,99</span><br></pre></td></tr></table></figure>
+
+<p>如这段代码所示，经过计(al)的值为197超出8位的表示范围，所以此时OF&#x3D;1，值应该为197-256&#x3D;-59</p>
+<h5 id="SF-Sign-Flag"><a href="#SF-Sign-Flag" class="headerlink" title="SF(Sign Flag)"></a>SF(Sign Flag)</h5><p>SF是<strong>符号标志位</strong>。用于记录结果的符号，<strong>结果为负时SF位置1，否则置0</strong>。(<strong>针对有符号数的计算</strong>)。</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240410195900292.png" alt="image-20240410195900292"></p>
+<h5 id="ZF-Zero-Flag"><a href="#ZF-Zero-Flag" class="headerlink" title="ZF(Zero Flag)"></a>ZF(Zero Flag)</h5><p>ZF是<strong>零标志位</strong>。<strong>当运算结果为0的时候，ZF置1，否则置0</strong>。本标注常用于分支程序或者循环程序的转移控制中。</p>
+<h5 id="CF-Carry-Flag"><a href="#CF-Carry-Flag" class="headerlink" title="CF(Carry Flag)"></a>CF(Carry Flag)</h5><p>CF是<strong>进位标志</strong>。这个标志位主要是记录<strong>运算时从最高位有效位产生的进位&#x2F;借位值</strong>。<strong>此时CF置1，否则置0</strong>。程序通常会根据CF标志位的状态决定程序是否转移。</p>
+<h5 id="AF-Auxiliary-Carry-Flag"><a href="#AF-Auxiliary-Carry-Flag" class="headerlink" title="AF(Auxiliary Carry Flag)"></a>AF(Auxiliary Carry Flag)</h5><p>AF是辅助标志进位位。记录运算时第三位(0.5个字节)产生的进位值。有进位则置1，否则为0。</p>
+<h5 id="PF-Parity-Flag"><a href="#PF-Parity-Flag" class="headerlink" title="PF(Parity Flag)"></a>PF(Parity Flag)</h5><p>PF是<strong>奇偶标志位</strong>。用来为机器中传送信息时可能产生的代码出错情况提供检验条件。当结果操作数中(二进制)1的个数为偶数时PF位置1，否则置0。</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240410204037139.png" alt="image-20240410204037139"></p>
+<p>常用于逻辑运算中，在数据传输中可通过检查本标志判定是否产生数据传输错误。</p>
+<h5 id="控制标志位"><a href="#控制标志位" class="headerlink" title="控制标志位"></a>控制标志位</h5><h6 id="DF-Direction-Flag"><a href="#DF-Direction-Flag" class="headerlink" title="DF(Direction Flag)"></a>DF(Direction Flag)</h6><p>DF是<strong>方向标志位</strong>。用于在<u>串处理指令中控制处理信息的方向</u>。当<strong>DF位为1</strong>时，每次操作后使<strong>变址寄存器SI和DI减小</strong>，这样就使<u>串处理从高地址向低地址方向处理</u>；当<strong>DF位为0</strong>时，则使<strong>SI和DI增大</strong>，使<u>串处理从低地址向到地址方向处理</u>。</p>
+<h6 id="TF-Trap-Flag"><a href="#TF-Trap-Flag" class="headerlink" title="TF(Trap Flag)"></a>TF(Trap Flag)</h6><p>TF是陷阱标志，又称单步跟踪标志，用于调试时的单步方式操作。当TF位为1时，每条指令执行完后产生陷阱，由系统控制计算机；当TF位为0时，CPU正常工作，不产生陷阱。</p>
+<h6 id="IF-Interrupt-Flag"><a href="#IF-Interrupt-Flag" class="headerlink" title="IF(Interrupt Flag)"></a>IF(Interrupt Flag)</h6><p>IF时中断标志。当IF为1时，允许CPU响应外部可屏蔽中断请求；否则关闭中断禁止外部中断请求。本标志对外部中断进行管理。</p>
 
       
     </div>
@@ -212,11 +229,7 @@
   
     <li><a href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a><small>4</small></li>
   
-    <li><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1/">数据建模</a><small>1</small></li>
-  
-    <li><a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a><small>3</small></li>
-  
-    <li><a href="/categories/%E7%AE%97%E6%B3%95/">算法</a><small>1</small></li>
+    <li><a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a><small>2</small></li>
   
     <li><a href="/categories/%E9%80%86%E5%90%91/">逆向</a><small>1</small></li>
   
@@ -235,11 +248,7 @@
   
     <li><a href="/tags/Re%E5%85%A5%E9%97%A8/">Re入门</a><small>1</small></li>
   
-    <li><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1/">数据建模</a><small>1</small></li>
-  
-    <li><a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a><small>3</small></li>
-  
-    <li><a href="/tags/%E7%AE%97%E6%B3%95/">算法</a><small>1</small></li>
+    <li><a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a><small>2</small></li>
   
     <li><a href="/tags/%E9%80%86%E5%90%91/">逆向</a><small>1</small></li>
   
