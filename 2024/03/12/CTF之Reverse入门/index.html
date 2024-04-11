@@ -64,19 +64,17 @@
       
         <h1 id="Reverse概述"><a href="#Reverse概述" class="headerlink" title="Reverse概述"></a>Reverse概述</h1> <span id="more"></span>
 
-<p><strong>注意，该文章只争对，Windows和Linux平台下的逆向</strong></p>
+<p><strong>注意，该文章只针对Windows和Linux平台下的逆向</strong></p>
 <p>​        Reverse即软件逆向工程，是对编译成型的二进制程序进行代码、 逻辑和功能分析的过程。在CTF比赛中，Reverse类型的题目主要考察选手的软件静态分析和动态调试能力，要求选手有较强的程序代码分析能力，同时对反调试、代码混淆等对抗技术有一定的了解。</p>
 <p>​        首先我们先来了解一下编译的过程。编译大致分为四个过程：预处理、编译、汇编、链接。</p>
-<h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4><p>​        在这个过程中，编译器将对所有的预处理命令进行文本操作，比如插入<code>include&lt;头文件&gt;</code></p>
+<h1 id="编译的过程"><a href="#编译的过程" class="headerlink" title="编译的过程"></a>编译的过程</h1><h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><p>​        在这个过程中，编译器将对所有的预处理命令进行文本操作，比如插入<code>include&lt;头文件&gt;</code></p>
 <p>中的内容、<code>define宏定义</code>替换文件中的符号等等。同时还有删除注释，添加行号，以及所需要的其他标识符。</p>
-<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><p>​        生成汇编语言。</p>
-<h4 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h4><p>​        将汇编指令转为机器代码，也就是二进制文件。</p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>​        链接库文件，生成<code>.exe</code>文件。</p>
-<h3 id="逆向分析的主要分析方法"><a href="#逆向分析的主要分析方法" class="headerlink" title="逆向分析的主要分析方法"></a>逆向分析的主要分析方法</h3><p>​        将二进制代码转为汇编代码的过程中容易缺失一些信息。可以通过逆向分析的方法还原以上信息。逆向分析的方法主要有两种：静态分析和动态分析。这里简单介绍这两种分析方法。</p>
-<p>​        静态分析</p>
-<p>​        主要是在不执行代码的情况下，只分析代码文件的外部特征，比如文件类型分析和静态反汇编、反编译。</p>
-<p>​        动态分析</p>
-<p>​        在程序文件执行的过程中对代码进行分析，通过调试来分析代码、获取内存的状态。</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>​        生成汇编语言。</p>
+<h2 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h2><p>​        将汇编指令转为机器代码，也就是二进制文件。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>​        链接库文件，生成<code>.exe</code>文件。</p>
+<h1 id="逆向分析的主要分析方法"><a href="#逆向分析的主要分析方法" class="headerlink" title="逆向分析的主要分析方法"></a>逆向分析的主要分析方法</h1><p>​        将二进制代码转为汇编代码的过程中容易缺失一些信息。可以通过逆向分析的方法还原以上信息。逆向分析的方法主要有两种：静态分析和动态分析。这里简单介绍这两种分析方法。</p>
+<h2 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h2><p>​        主要是在不执行代码的情况下，只分析代码文件的外部特征，比如文件类型分析和静态反汇编、反编译。</p>
+<h2 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h2><p>​        在程序文件执行的过程中对代码进行分析，通过调试来分析代码、获取内存的状态。</p>
 <p>​       </p>
 
       
