@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240410195900292.png">
 <meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240410204037139.png">
 <meta property="article:published_time" content="2024-03-23T12:42:47.000Z">
-<meta property="article:modified_time" content="2024-04-11T10:20:40.804Z">
+<meta property="article:modified_time" content="2024-04-13T07:47:29.633Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-04-11 18:20:40" itemprop="dateModified" datetime="2024-04-11T18:20:40+08:00">2024-04-11</time>
+                <time title="Modified: 2024-04-13 15:47:29" itemprop="dateModified" datetime="2024-04-13T15:47:29+08:00">2024-04-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,14 +263,14 @@
 <p>2、判断ECX中从值是否为0，为0则结束循环，不为0则继续下列指令</p>
 <h4 id="DX寄存器"><a href="#DX寄存器" class="headerlink" title="DX寄存器"></a>DX寄存器</h4><p>DX寄存器又叫做<strong>数据寄存器</strong>，在寄存器间接寻址中的I&#x2F;O指令中存放I&#x2F;O端口的地址；在字乘时存放积的高字节；在字除时提供被除数的高位，并存放余数。</p>
 <hr>
-<h3 id="指针寄存器"><a href="#指针寄存器" class="headerlink" title="指针寄存器"></a>指针寄存器</h3><h4 id="BP寄存器"><a href="#BP寄存器" class="headerlink" title="BP寄存器"></a>BP寄存器</h4><p>BP寄存器(Base)又叫做<strong>基址指针寄存器</strong>。用来<strong>指示堆栈中某个数据区的偏移地址</strong>——基地址，<strong>与SS堆栈段寄存器一起形成堆栈中某个存储单元的物理地址</strong>。BP可以对堆栈中任意位置的数据进行操作，<u>但不具备SP始终指向堆栈栈顶的含义</u>。</p>
+<h3 id="指针寄存器"><a href="#指针寄存器" class="headerlink" title="指针寄存器"></a>指针寄存器</h3><h4 id="BP寄存器"><a href="#BP寄存器" class="headerlink" title="BP寄存器"></a>BP寄存器</h4><p>BP寄存器(Base Pointer)又叫做<strong>基址指针寄存器</strong>。用来<strong>指示堆栈中某个数据区的偏移地址</strong>——基地址，<strong>与SS堆栈段寄存器一起形成堆栈中某个存储单元的物理地址</strong>。BP可以对堆栈中任意位置的数据进行操作，<u>但不具备SP始终指向堆栈栈顶的含义</u>。</p>
 <p>下面用代码的方式体现bp在寻址中的作用：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ebp,0</span><br><span class="line">mov eax,[ebp]  ;将SS:bp代表的内存单元移入eax中</span><br><span class="line">mov eax,cs:[ebp]  ;将CS:[bp]代表的内存单元移入eax中</span><br></pre></td></tr></table></figure>
 
 <p>bp不是数据寄存器，也就意味着其<u>不能分割成2个独立的8位寄存器使用</u>。</p>
 <p>当<strong>以[…]的方式访问内存单元并且使用bp</strong>的，那么如果在指令中<strong>没有明确或者说显示的给出段地址</strong>时，**段地址则使用默认的SS寄存器中的值(BX,SI,DI会默认使用DS寄存器)**，比如：</p>
 <p><strong>DS:[BP]<strong>明确给出了</strong>段地址位于DS中</strong>，所以这里代表的<strong>内存单元即是段地址DS</strong>，<strong>偏移量为BP寄存器中的值的内存单元</strong>。</p>
-<h4 id="SP寄存器"><a href="#SP寄存器" class="headerlink" title="SP寄存器"></a>SP寄存器</h4><p>SP寄存器又叫做<strong>堆栈指针寄存器</strong>。堆栈是指<u>内存中开辟一个专用的数据存储区</u>，它具有”<strong>先进后出</strong>“的存储特性。主要用来<u>保护程序的现场和断点</u>，在<u>子程序中调用和中断操作</u>中使用。</p>
+<h4 id="SP寄存器"><a href="#SP寄存器" class="headerlink" title="SP寄存器"></a>SP寄存器</h4><p>SP寄存器(Stack Pointer)又叫做<strong>堆栈指针寄存器</strong>。堆栈是指<u>内存中开辟一个专用的数据存储区</u>，它具有”<strong>先进后出</strong>“的存储特性。主要用来<u>保护程序的现场和断点</u>，在<u>子程序中调用和中断操作</u>中使用。</p>
 <p>SP用来<strong>指出当前堆栈的栈顶的位置</strong>，在堆栈指令操作时，由它<strong>给出入栈或出栈的数据在栈中的偏移地址</strong>，<strong>与SS堆栈段寄存器一起形栈顶存储单元的物理地址</strong>。</p>
 <p>在8086系统中，堆栈是由<strong>高地址向低地址端扩展</strong>，即<strong>入栈时SP减2</strong>.随着入栈数据的增多，<u>堆栈扩展，SP值减小</u>。</p>
 <hr>
@@ -415,11 +415,11 @@
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
