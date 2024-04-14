@@ -20,15 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2023/index.html">
+  <meta name="description" content="前言:dbg是很好的调试工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dbg的基本使用">
+<meta property="og:url" content="http://example.com/2024/04/13/dbg%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言:dbg是很好的调试工具">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/QQ%E5%9B%BE%E7%89%8720240413201247.png">
+<meta property="article:published_time" content="2024-04-13T12:01:02.000Z">
+<meta property="article:modified_time" content="2024-04-14T05:15:27.475Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/$%7Bfiilename%7D/QQ%E5%9B%BE%E7%89%8720240413201247.png">
 
-<link rel="canonical" href="http://example.com/archives/2023/">
+<link rel="canonical" href="http://example.com/2024/04/13/dbg%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
 
 
 <script id="page-configurations">
@@ -36,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Hexo</title>
+  <title>dbg的基本使用 | Hexo</title>
   
 
 
@@ -139,50 +146,114 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 14 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/13/dbg%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          dbg的基本使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-04-13 20:01:02" itemprop="dateCreated datePublished" datetime="2024-04-13T20:01:02+08:00">2024-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-04-14 13:15:27" itemprop="dateModified" datetime="2024-04-14T13:15:27+08:00">2024-04-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+        <p> 前言:dbg是很好的调试工具</p>
+<span id="more"></span>
+
+<h3 id="dbg的界面"><a href="#dbg的界面" class="headerlink" title="dbg的界面"></a>dbg的界面</h3><p>我们将.exe的文件拖入dbg,下图演示的是32位的dbg。</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/QQ%E5%9B%BE%E7%89%8720240413201247.png" alt="QQ图片20240413201247"></p>
+<p>一共有四个窗口，分别是：反汇编窗口、寄存器窗口、数据窗口、堆栈窗口。</p>
+<p>这里需要充分了解部分寄存器</p>
+<p>esp寄存器：拓展堆栈指针寄存器，其指向的是当前栈空间的地址。</p>
+<p>eip寄存器:指令拓展寄存器，其总是指向下一条要被执行的指令</p>
+<p>标志位寄存器：ZF、OF、CF</p>
+<h3 id="基本的快捷键及功能"><a href="#基本的快捷键及功能" class="headerlink" title="基本的快捷键及功能"></a>基本的快捷键及功能</h3><p>F2：下断点，指定断点的地址(断点是软件断点，与硬件断点有所区别)</p>
+<p>F3：加载一个可执行程序</p>
+<p>F4：执行程序到光标处</p>
+<p>F7：单步步入</p>
+<p>F8：单步步过</p>
+<p>F9：直接运行程序，遇到断点暂停</p>
+<p>Ctrl+F2：重新运行到起始处</p>
+<p>Ctrl+F9：执行到函数的返回处</p>
+<p>Alt+F9：执行到用户代码处</p>
+<p>Ctlr+G：快速定位地址</p>
+<h3 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h3><p>OEP(Original Entry Point):</p>
+<p>程序的入口点。软件加壳一般隐藏了真实的OEP(或者使用了假的OEP)，这时我们需要寻找程序真正的OEP,才可以完成脱壳。</p>
+<p>IAT(Import Address Table):</p>
+<p>在可执行文件中使用其他DLL可执文件的代码或者数据,称为导入或者输出。在脱壳或者加壳的部分中，导入表是什么关键的一部分。加壳要尽可能的破坏和隐藏原始的导入表；而脱壳刚好相反。</p>
+<p>ESP定律法:</p>
+<p>ESP定律的原理在于利用程序中堆栈平衡来快速找到OEP。由于在程序自解密或者自解压的过程中，不少壳会先将当前寄存器状态压栈,如使用pushad,在解压结束后,会将之前的寄存器值出栈,如使用popad(OEP就在附近)。因此在寄存器出栈时，往往程序代码被恢复，此时硬件断点触发。然后在程序当前位置，只需要少许单步操作，就很容易达到正确的OEP位置。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-11-05T16:39:29+08:00"
-              content="2023-11-05">
-          11-05
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/11/05/%E8%AE%A1%E7%AE%97BMI%E6%8C%87%E6%95%B0/" itemprop="url">
-            <span itemprop="name">计算BMI指数</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/11/%E5%9B%BD%E5%AE%89%E7%AC%94%E8%AE%B0/" rel="prev" title="国安笔记">
+      <i class="fa fa-chevron-left"></i> 国安笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/14/%E8%AF%BB%E6%87%82%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%E4%B9%8Bhello%20World/" rel="next" title="读懂汇编代码之hello World">
+      读懂汇编代码之hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -235,6 +306,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#dbg%E7%9A%84%E7%95%8C%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">dbg的界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8F%8A%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">基本的快捷键及功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">相关概念</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
