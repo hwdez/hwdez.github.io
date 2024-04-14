@@ -28,7 +28,7 @@
 <meta property="og:description" content="前言：学习8086指令体系中的数据传送类指令">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-05T15:56:53.000Z">
-<meta property="article:modified_time" content="2024-04-13T06:31:35.577Z">
+<meta property="article:modified_time" content="2024-04-14T11:55:26.614Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-04-13 14:31:35" itemprop="dateModified" datetime="2024-04-13T14:31:35+08:00">2024-04-13</time>
+                <time title="Modified: 2024-04-14 19:55:26" itemprop="dateModified" datetime="2024-04-14T19:55:26+08:00">2024-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -208,17 +208,49 @@
 <span id="more"></span>
 
 <h3 id="MOV指令"><a href="#MOV指令" class="headerlink" title="MOV指令"></a>MOV指令</h3><p>MOV指令将源操作数复制到目的的操作数。格式如下：</p>
-<p> <code>MOV destination,source</code></p>
+<p><code>mov OPD,OPS</code></p>
 <p>其中，目的操作数的内容会发生改变，而源操作数不会改变。这种数据从右到左的移动与C++或Java中的赋值语句相似。</p>
 <p>在几乎所有的汇编语言指令中，左边的操作数是<strong>目标操作数</strong>，而右边的操作数是<strong>源操作数</strong>。只要按照如下原则，MOV指令使用操作数是非常灵活的。        </p>
-<p><code>MOV reg,reg</code></p>
-<p><code>MOV mem,reg</code></p>
-<p><code>MOV reg mem</code></p>
-<p><code>MOV mem imm</code></p>
-<p><code>MOV reg imm</code></p>
+<p><code>mov reg/mem,imm</code></p>
+<p><code>mov seg/reg/mem,reg</code></p>
+<p><code>mov seg/reg,mem</code></p>
+<p><code>mov reg/mem,seg</code></p>
 <p><u>(reg表示的是通用寄存器；mem表示内存单元；imm是立即数；seg表示的是段寄存器)</u></p>
-<p><strong>内存到内存</strong>  单条MOV指令不能直接将数据从一个内存位置传送到另一个内存位置。相反，在将操作数的值赋值给内存操作数之前，必须先将该数值传从给另一个寄存器：</p>
+<p><strong>内存到内存</strong>  单条MOV指令不能直接将数据从一个内存位置传送到另一个内存位置。相反，在将操作数的值赋值给内存操作数之前，必须先将该数值传从给另一个寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov reg,mem</span><br><span class="line">mov mem,reg</span><br></pre></td></tr></table></figure>
 
+<p><strong>MOV指令小结</strong></p>
+<ol>
+<li><strong>两个存储单元之间</strong>不可以直接传送数据。<strong>两个内存单元</strong>之间不能进行操作，<strong>适用于所有操作</strong>。</li>
+<li>目的操作数<strong>不能是CS及立即数</strong>，CS寄存器的内容是由操作系统给出；同样的<strong>IP也不能作为OPD</strong>。</li>
+<li>OPD、OPS的<strong>位数必须保持一致</strong>，同样适用于所有指令。</li>
+<li>计算机根据寄存器<strong>默认其省略的段寄存器</strong>，所以指令只要<strong>给出偏移地址</strong>。</li>
+<li>在内存和寄存器之间传送字类型数据是<strong>高地址和高8位寄存器对应</strong>，<strong>低地址和低8位寄存器</strong>对应。</li>
+</ol>
+<h3 id="查表指令XLAT"><a href="#查表指令XLAT" class="headerlink" title="查表指令XLAT"></a>查表指令XLAT</h3><p><strong>指令格式</strong>:  </p>
+<p>XLAT  TABLE   或  XLAT</p>
+<p>指令功能:把待查表格的一个字节内容送到AL累加器中。待查表格存于内存单元，TABLE为待查表格的首地址</p>
+<p>执行前，应将待查表格的首地址TABLE先送到BX寄存器中，然后将待查字节与其距表首地址的位移量送给AL</p>
+<p>执行后，将有效地址为(BX) + (AL) 的内容单元的内容传送给(AL)。即(AL) &lt;—— ((BX) + (AL))</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设待查表的首地址为1000H，待查字节与表首地址的偏移量为6，则执行前要将首地址送到BX寄存器，位移量送AL寄存器，执行后AL = 88H。</span><br></pre></td></tr></table></figure>
+
+<p>**指令中没有出现AL和BX寄存器，在指令中没有出现的寄存器称为隐含寄存器。 **</p>
+<h3 id="堆栈指令PUSH和POP"><a href="#堆栈指令PUSH和POP" class="headerlink" title="堆栈指令PUSH和POP"></a>堆栈指令PUSH和POP</h3><p>数据进入堆栈的操作称为进栈(PUSH)，数据退出堆栈的操作称为出栈(POP)</p>
+<p>SP指向栈顶，当数据进栈时，SP做减量调整，即栈顶向低地址调整；数据出栈时，SP做增量调整，即栈顶向高地址调整</p>
+<p>在8086中，堆栈的进栈和出栈都是以字为单位，即每次进栈和出栈都是两个字节</p>
+<p><strong>指令格式</strong>:</p>
+<p>PUSH     OPD</p>
+<p>POP       OPD</p>
+<p>指令功能:PUSH指令将OPD压入栈，栈顶指针SP自动减2；POP指令将栈顶的一个字数据送到OPD，栈顶指针SP自动加2<br><strong>OPD必须是16位寄存器，16位内存单元</strong></p>
+<p>堆栈操作指令不改变标志位寄存器。堆栈指令多用于保存中间结果，也用于保存子程序或中断现场</p>
+<p>例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push ax</span><br><span class="line">push bx</span><br><span class="line">pop ax</span><br><span class="line">pop bx</span><br></pre></td></tr></table></figure>
+
+<p>假设执行前ax &#x3D; 4444H，bx &#x3D; 5555H；则执行完ax &#x3D; 5555H， bx &#x3D; 4444H</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pop [BX]  ;  将栈顶的数据传送给BX寄存器指向两个连续的内存单元</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="标志传送寄存器"><a href="#标志传送寄存器" class="headerlink" title="标志传送寄存器"></a>标志传送寄存器</h3>
     </div>
 
     
@@ -301,7 +333,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MOV%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">MOV指令</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MOV%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">MOV指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%A1%A8%E6%8C%87%E4%BB%A4XLAT"><span class="nav-number">2.</span> <span class="nav-text">查表指令XLAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%A0%88%E6%8C%87%E4%BB%A4PUSH%E5%92%8CPOP"><span class="nav-number">3.</span> <span class="nav-text">堆栈指令PUSH和POP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E4%BC%A0%E9%80%81%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">标志传送寄存器</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
