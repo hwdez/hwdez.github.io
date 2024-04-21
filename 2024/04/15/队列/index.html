@@ -27,11 +27,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言:学习数据结构的队列">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240419140722386.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240421170034782.png">
 <meta property="article:published_time" content="2024-04-15T09:22:23.000Z">
-<meta property="article:modified_time" content="2024-04-15T09:25:09.751Z">
+<meta property="article:modified_time" content="2024-04-21T10:16:09.387Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240419140722386.png">
 
 <link rel="canonical" href="http://example.com/2024/04/15/%E9%98%9F%E5%88%97/">
 
@@ -173,10 +176,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-04-15 17:22:23 / Modified: 17:25:09" itemprop="dateCreated datePublished" datetime="2024-04-15T17:22:23+08:00">2024-04-15</time>
+              <time title="Created: 2024-04-15 17:22:23" itemprop="dateCreated datePublished" datetime="2024-04-15T17:22:23+08:00">2024-04-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-04-21 18:16:09" itemprop="dateModified" datetime="2024-04-21T18:16:09+08:00">2024-04-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -201,8 +210,33 @@
         <p>前言:学习数据结构的队列</p>
 <span id="more"></span>
 
-<p>与栈相反，队列是一种先进先出的线性表。它只允许在表的一端进行插入，在另一端删除元素。(先进先出FIFO、后进后出LILO)</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+<h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><p>与栈相反，队列是一种先进先出的线性表。它只允许在表的一端进行插入，在另一端删除元素。(先进先出FIFO、后进后出LILO)</p>
+<ul>
+<li><strong>队首(front)</strong>:允许进行删除的一端称为队首</li>
+<li><strong>队尾(rear)</strong>:允许进行插入的一端为队尾</li>
+</ul>
+<p>队列中没有元素时称为空队列</p>
+<ul>
+<li>在空队列中依次加入元素a<del>1</del>,a<del>2</del>，……，a<del>n</del>之后，a<del>1</del>是队首元素，a<del>n</del>是队尾元素。显然，退出队列的次序也只能是a<del>1</del>，a<del>2</del>，……，a<del>n</del>，即<u>队列的修改是依先进先出的原则进行</u></li>
+</ul>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240419140722386.png" alt="image-20240419140722386"></p>
+<h3 id="队列的顺序存储表示"><a href="#队列的顺序存储表示" class="headerlink" title="队列的顺序存储表示"></a>队列的顺序存储表示</h3><p>利用一组连续的存储单元(<strong>一维数组</strong>)<u>依次存放从队首到队尾的各个元素，称为顺序队列</u></p>
+<p>对于队列，和顺序栈相类似，也有动态和静态之分。</p>
+<h4 id="静态顺序队列的类型定义"><a href="#静态顺序队列的类型定义" class="headerlink" title="静态顺序队列的类型定义"></a>静态顺序队列的类型定义</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXI_SIZE  100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">quene</span>&#123;</span><br><span class="line">    ElemType array[MAX_SIZE];</span><br><span class="line">    <span class="type">int</span> front;</span><br><span class="line">    <span class="type">int</span> rear;</span><br><span class="line">&#125;SqQuene;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>**队首指针(front)<strong>和</strong>队尾指针(rear)**，分别指向队首元素和队尾元素。</li>
+</ul>
+<p>与栈类似，队列进行顺序存储时，也常空出一个数组元素空间！目的:</p>
+<ol>
+<li>识别队列空和队列满2种状态；</li>
+<li>规避队列数组下标越界[非法]的问题</li>
+</ol>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240421170034782.png" alt="image-20240421170034782"></p>
+<p>下面用代码呈现:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化静态队列</span></span><br><span class="line"><span class="function">SqQuene <span class="title">Init_CirQuene</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SqQuene Q;  <span class="comment">//定义一个队列</span></span><br><span class="line">    Q.front = Q.rear = <span class="number">0</span>;  <span class="comment">//队头&amp;队尾都指向0</span></span><br><span class="line">    <span class="keyword">return</span>(Q);  <span class="comment">//返回队列Q</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将数据元素e插入到循环队列Q的队尾(空出a[n - 1]的队列)</span></span><br><span class="line"><span class="function">Status <span class="title">Insert_CirQuene</span><span class="params">(SqQuene &amp;Q,ElemType e)</span></span>&#123;</span><br><span class="line">    <span class="comment">//队满，返回错误标志</span></span><br><span class="line">    <span class="keyword">if</span>((Q.rear + <span class="number">1</span>) % MAX_SIZE == Q.front)&#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//(a)e元素入队</span></span><br><span class="line">    Q.array[Q.rear] = e;</span><br><span class="line">    <span class="comment">//(b)队尾指针向前移动</span></span><br><span class="line">    Q.rear = (Q.rear + <span class="number">1</span>) % MAX_SIZE;</span><br><span class="line">    <span class="keyword">return</span> OK;  <span class="comment">//(c)入队成功</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将循环队列Q的队首元素出队(空出a[n - 1]的队列)</span></span><br><span class="line"><span class="function">Status <span class="title">Delete_CirQuene</span><span class="params">(SqQuene &amp;Q,ElemType *x)</span></span>&#123;</span><br><span class="line">    <span class="comment">//队空，返回错误标志</span></span><br><span class="line">    <span class="keyword">if</span>(Q.front == Q.rear)&#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//(a)取队首元素</span></span><br><span class="line">    *x = Q.array[Q.front];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -285,7 +319,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">队列的顺序存储表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%A1%BA%E5%BA%8F%E9%98%9F%E5%88%97%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">静态顺序队列的类型定义</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -299,16 +333,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="前言:算数运算指令可以分为单操作数指令，也有双操作数指令，还有隐含操作数 ​		操作数可分为8位和16位二进制数。其中双操作数指令不允许两个操作数都是存储器操作数，目的操作数不能是立即数。两个操作数的位数要一样 ​		单操作数指令操作数不允许是立即数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-16T06:10:25.000Z">
-<meta property="article:modified_time" content="2024-04-16T07:29:46.667Z">
+<meta property="article:modified_time" content="2024-04-21T07:36:40.954Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-04-16 14:10:25 / Modified: 15:29:46" itemprop="dateCreated datePublished" datetime="2024-04-16T14:10:25+08:00">2024-04-16</time>
+              <time title="Created: 2024-04-16 14:10:25" itemprop="dateCreated datePublished" datetime="2024-04-16T14:10:25+08:00">2024-04-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-04-21 15:36:40" itemprop="dateModified" datetime="2024-04-21T15:36:40+08:00">2024-04-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -231,6 +237,60 @@
 <p>指令功能:实现两个无符号数的乘法运算。当OPD为8位字节数据时为字节相乘，将AL寄存器与OPD相乘，结果存于AX寄存器，即AX  ⬅  (AL) × OPD，AL是隐含操作数，在指令中没有出现</p>
 <p>当OPD为16位字数据时为字相乘，将AX寄存器与OPD相乘，结果存于DX和AX寄存器。即(DX)(AX)  ⬅  (AX) × OPD，AX是隐含操作数</p>
 <p>对标志位的影响:影响CF、OF标志如果乘积的高一半为0，则CF &#x3D; OF &#x3D; 0，否则CF &#x3D; OF &#x3D; 1</p>
+<h4 id="有符号数乘法指令IMUL"><a href="#有符号数乘法指令IMUL" class="headerlink" title="有符号数乘法指令IMUL"></a>有符号数乘法指令IMUL</h4><p>指令格式:IMUL  OPD</p>
+<p>指令功能和用法与无符号数乘法类似。只是专用于有符号数的相乘</p>
+<p>乘法指令对标志位的影响:如果乘积的高一半为低一半的符号扩展则CF &#x3D; 0;OF &#x3D; 0否则CF &#x3D; 1;OF  &#x3D; 1</p>
+<h3 id="除法指令"><a href="#除法指令" class="headerlink" title="除法指令"></a>除法指令</h3><h4 id="无符号除法DIV"><a href="#无符号除法DIV" class="headerlink" title="无符号除法DIV"></a>无符号除法DIV</h4><p>指令格式:DIV  OPD</p>
+<p>指令功能:实现两个无符号数的除法运算。当OPD为8位字节数据时为字节相除。(16位&#x2F;8位 &#x3D; 商8位  余数8位)</p>
+<p>被除数在AX中，除数在OPD中。(AX)&#x2F;OPD，AL  ⬅  商，AH  ⬅  余数，AX时隐含操作数</p>
+<p>当OPD是16位字数据相除时字相除(32位&#x2F;16位 &#x3D; 商16位  余数8位)，被除数在DX和AX中，除数在OPD中。(DX)(AX)&#x2F;OPD，AX  ⬅  商，</p>
+<p>DX  ⬅  余数，DX和AX是隐含操作数</p>
+<h4 id="有符号数除法IDIV"><a href="#有符号数除法IDIV" class="headerlink" title="有符号数除法IDIV"></a>有符号数除法IDIV</h4><p>指令格式:IDIV  OPD</p>
+<p>指令功能和用法与无符号数除法类似，只是专用于有符号数的相除</p>
+<p>除法指令对标志位的影响:除法指令对标志没有定义。除法指令会产生结果溢出，当被除数远大于除数时便产生溢出，8086CPU中就产生编号为0的内部中断，运行相应的中断程序。程序设计时应当避免产生除法溢出</p>
+<p>对DIV指令，当除数为字节除时商 &gt; 8或者在字除时商 &gt; 16时，会发生除法溢出。</p>
+<p>对IDIV指令，当除数为0、在字节除时商不在 -128到127或者在字除时商不在-32768到32767时，会发生除法溢出。</p>
+<h3 id="符号扩展指令"><a href="#符号扩展指令" class="headerlink" title="符号扩展指令"></a>符号扩展指令</h3><p>符号扩展是指用一个操作数的符号位(即最高位)形成另一个操作数，形成的操作数是各位全0(最高位为0)或者各位全1的数(最高位为1)。符号扩展不改变数据大小</p>
+<h4 id="字节扩展为字CBW"><a href="#字节扩展为字CBW" class="headerlink" title="字节扩展为字CBW"></a>字节扩展为字CBW</h4><p>指令格式:CBW</p>
+<p>指令功能:将AL的符号位扩展到AH，如AL的最高有效位是0，则AH &#x3D;&#x3D; 00，AL的最高有效位为1，则AH &#x3D; 0FFH。AL保持不变</p>
+<h4 id="字扩展为双字CWD"><a href="#字扩展为双字CWD" class="headerlink" title="字扩展为双字CWD"></a>字扩展为双字CWD</h4><p>指令格式:CWD</p>
+<p>指令功能:将AX的符号位扩展到DX，如AX的最高有效位是0，则DX &#x3D; 0000H，AX的最高有效位为1，则DX &#x3D; 0FFFFH。AX保持不变。</p>
+<p>因为除法指令要求被除数的位数是除数的倍长。符号扩展指令主要用于在有符号数除法中扩展被除数的位数。对无符号数除法可直接高8位或高16位清0，以获得倍长的被除数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov al,0F7H   ;AL = F7H</span><br><span class="line">cbw           ;AX = FFF7H</span><br><span class="line">mov al,47h    ;AL = 47H</span><br><span class="line">cbw           ;AX = 0047H   </span><br></pre></td></tr></table></figure>
+
+<h3 id="十进制数调整指令"><a href="#十进制数调整指令" class="headerlink" title="十进制数调整指令"></a>十进制数调整指令</h3><h4 id="压缩BCD码加法调整指令DAA"><a href="#压缩BCD码加法调整指令DAA" class="headerlink" title="压缩BCD码加法调整指令DAA"></a>压缩BCD码加法调整指令DAA</h4><p>指令格式:DAA</p>
+<p>指令功能:对两个压缩十进制相加运算存于AL中的结果进行调整，产生一个压缩组合的十进制数在AL中，其进位在CF中</p>
+<p>调整操作:</p>
+<p>若AL&amp;0FH &gt; 9或AF &#x3D; 1:</p>
+<p>则AL  ⬅  AL + 6，AF  ⬅  1</p>
+<p>若AL&amp;F0H &gt; 90H或CF &#x3D; 1</p>
+<p>则AL ⬅  AL + 60H，CF  ⬅  1</p>
+<p>本指令跟在加法指令之后，影响标志位AF、CF、PF、SF、ZF</p>
+<h4 id="压缩BCD码减法调整指令DAS"><a href="#压缩BCD码减法调整指令DAS" class="headerlink" title="压缩BCD码减法调整指令DAS"></a>压缩BCD码减法调整指令DAS</h4><p>指令格式:DAS</p>
+<p>指令功能:对两个压缩十进制相减存于AL中的结果进行调整，产生一个压缩组合的十进制数存于AL中</p>
+<p>调整操作:</p>
+<p>若AL&amp;0FH &gt; 9或AF &#x3D; 1</p>
+<p>则AL  ⬅  AL - 6，AF ⬅  1</p>
+<p>若AL&amp;F0H  &gt; 90H或CF &#x3D; 1</p>
+<p>则AL  ⬅  AL - 60H，CF  ⬅  1</p>
+<p>本指令跟在减法指令之后，影响标志位AF、CF、PF、SF、ZF</p>
+<h4 id="非压缩BCD码加法调整指令AAA"><a href="#非压缩BCD码加法调整指令AAA" class="headerlink" title="非压缩BCD码加法调整指令AAA"></a>非压缩BCD码加法调整指令AAA</h4><p>指令格式:对两个未压缩十进制相加运算存于AL中的结果进行调整，产生一个未压缩的十进制数在AX中</p>
+<p>调整操作:</p>
+<p>若AL&amp;0FH &gt; 9或AF &#x3D; 1；</p>
+<p>则AL  ⬅  AL  - 6，AH  ⬅  AH - 1，AF  ⬅  1，CF  ⬅  AF，AL  ⬅  AL&amp;0FH</p>
+<h4 id="非压缩BCD码减法指令AAS"><a href="#非压缩BCD码减法指令AAS" class="headerlink" title="非压缩BCD码减法指令AAS"></a>非压缩BCD码减法指令AAS</h4><p>指令格式:AAS</p>
+<p>指令功能:对两个未压缩十进制相减运算存于AL中的结果进行调整，产生一个未压缩十进制数存在AX中。</p>
+<p>调整操作:</p>
+<p>若AL&amp;0FH  &gt; 9或AF &#x3D; 1</p>
+<p>则AL  ⬅  AL - 6，AH  ⬅  AH - 1,AF  ⬅  1,CF  ⬅  AF,AL  ⬅  AL&amp;0FH</p>
+<p>否则AL  ⬅  AL&amp;0FH</p>
+<p>本指令紧跟在减法指令之后使用，使用标志位AF、CF</p>
+<h4 id="非压缩BCD码乘法调整指令AAM"><a href="#非压缩BCD码乘法调整指令AAM" class="headerlink" title="非压缩BCD码乘法调整指令AAM"></a>非压缩BCD码乘法调整指令AAM</h4><p>指令格式:AAM</p>
+<p>指令功能:对两个未压缩十进制数相乘存于AX中的结果进行调整，产生一个未压缩的十进制数存在AX中，即<strong>AH  ⬅  将AL除以0AH的商，AL⬅  将AL除以0AH的余数</strong></p>
+<p>本指令应跟在MUL指令后使用，影响标志位PF、SF、ZF</p>
+<h4 id="非压缩BCD码除法指令AAD"><a href="#非压缩BCD码除法指令AAD" class="headerlink" title="非压缩BCD码除法指令AAD"></a>非压缩BCD码除法指令AAD</h4><p>指令格式:AAD</p>
+<p>指令功能:把AX中的两个未压缩十进制数进行调整，然后可按DIV指令实现两个未压缩十进制数的除法算，其结果<strong>为未压缩十进制商</strong><br>**(在AL中)和余数(在AH中)**，即AL  ⬅  AH × 10 + AL，AH  ⬅  0</p>
+<p>本指令应<strong>在除法运算之前使用</strong>，对<strong>AX中的压缩十进制数进行调整</strong>，调整后<strong>再进行二进制除法运算</strong>，这与前述的加减乘法的调整过程是不同的。本指令影响标志位PF、SF、ZF</p>
 
     </div>
 
@@ -314,7 +374,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">加法指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ADD%E5%8A%A0%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">ADD加法指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ADC%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">ADC带进位加法指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#INC%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">INC指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%8F%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">减法指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SUB%E5%87%8F%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">SUB减法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E5%80%9F%E4%BD%8D%E5%87%8F%E6%B3%95%E6%8C%87%E4%BB%A4SBB"><span class="nav-number">3.</span> <span class="nav-text">带借位减法指令SBB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%8F1%E6%8C%87%E4%BB%A4DEC"><span class="nav-number">3.1.</span> <span class="nav-text">减1指令DEC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E8%A1%A5%E6%8C%87%E4%BB%A4NEG"><span class="nav-number">3.2.</span> <span class="nav-text">求补指令NEG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%8C%87%E4%BB%A4CMP"><span class="nav-number">3.3.</span> <span class="nav-text">比较指令CMP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">乘法指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MUL%E6%97%A0%E7%AC%A6%E5%8F%B7%E4%B9%98%E6%B3%95%E6%95%B0%E6%8C%87%E4%BB%A4"><span class="nav-number">4.1.</span> <span class="nav-text">MUL无符号乘法数指令</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">加法指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ADD%E5%8A%A0%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">ADD加法指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ADC%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">ADC带进位加法指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#INC%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">INC指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%8F%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">减法指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SUB%E5%87%8F%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">SUB减法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E5%80%9F%E4%BD%8D%E5%87%8F%E6%B3%95%E6%8C%87%E4%BB%A4SBB"><span class="nav-number">3.</span> <span class="nav-text">带借位减法指令SBB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%8F1%E6%8C%87%E4%BB%A4DEC"><span class="nav-number">3.1.</span> <span class="nav-text">减1指令DEC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E8%A1%A5%E6%8C%87%E4%BB%A4NEG"><span class="nav-number">3.2.</span> <span class="nav-text">求补指令NEG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%8C%87%E4%BB%A4CMP"><span class="nav-number">3.3.</span> <span class="nav-text">比较指令CMP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%98%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">乘法指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MUL%E6%97%A0%E7%AC%A6%E5%8F%B7%E4%B9%98%E6%B3%95%E6%95%B0%E6%8C%87%E4%BB%A4"><span class="nav-number">4.1.</span> <span class="nav-text">MUL无符号乘法数指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E4%B9%98%E6%B3%95%E6%8C%87%E4%BB%A4IMUL"><span class="nav-number">4.2.</span> <span class="nav-text">有符号数乘法指令IMUL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%A4%E6%B3%95%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">除法指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E9%99%A4%E6%B3%95DIV"><span class="nav-number">5.1.</span> <span class="nav-text">无符号除法DIV</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E9%99%A4%E6%B3%95IDIV"><span class="nav-number">5.2.</span> <span class="nav-text">有符号数除法IDIV</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E6%89%A9%E5%B1%95%E6%8C%87%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">符号扩展指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E6%89%A9%E5%B1%95%E4%B8%BA%E5%AD%97CBW"><span class="nav-number">6.1.</span> <span class="nav-text">字节扩展为字CBW</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%89%A9%E5%B1%95%E4%B8%BA%E5%8F%8C%E5%AD%97CWD"><span class="nav-number">6.2.</span> <span class="nav-text">字扩展为双字CWD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6%E6%95%B0%E8%B0%83%E6%95%B4%E6%8C%87%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">十进制数调整指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9BCD%E7%A0%81%E5%8A%A0%E6%B3%95%E8%B0%83%E6%95%B4%E6%8C%87%E4%BB%A4DAA"><span class="nav-number">7.1.</span> <span class="nav-text">压缩BCD码加法调整指令DAA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9BCD%E7%A0%81%E5%87%8F%E6%B3%95%E8%B0%83%E6%95%B4%E6%8C%87%E4%BB%A4DAS"><span class="nav-number">7.2.</span> <span class="nav-text">压缩BCD码减法调整指令DAS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E5%8E%8B%E7%BC%A9BCD%E7%A0%81%E5%8A%A0%E6%B3%95%E8%B0%83%E6%95%B4%E6%8C%87%E4%BB%A4AAA"><span class="nav-number">7.3.</span> <span class="nav-text">非压缩BCD码加法调整指令AAA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E5%8E%8B%E7%BC%A9BCD%E7%A0%81%E5%87%8F%E6%B3%95%E6%8C%87%E4%BB%A4AAS"><span class="nav-number">7.4.</span> <span class="nav-text">非压缩BCD码减法指令AAS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E5%8E%8B%E7%BC%A9BCD%E7%A0%81%E4%B9%98%E6%B3%95%E8%B0%83%E6%95%B4%E6%8C%87%E4%BB%A4AAM"><span class="nav-number">7.5.</span> <span class="nav-text">非压缩BCD码乘法调整指令AAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E5%8E%8B%E7%BC%A9BCD%E7%A0%81%E9%99%A4%E6%B3%95%E6%8C%87%E4%BB%A4AAD"><span class="nav-number">7.6.</span> <span class="nav-text">非压缩BCD码除法指令AAD</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -328,16 +388,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/categories/%E7%AB%9E%E8%B5%9B%E7%AC%94%E8%AE%B0/index.html">
+  <meta name="description" content="前言:学习数据结构中的数组&#x2F;矩阵">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组&#x2F;矩阵">
+<meta property="og:url" content="http://example.com/2024/04/19/%E6%95%B0%E7%BB%84-%E7%9F%A9%E9%98%B5/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言:学习数据结构中的数组&#x2F;矩阵">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-19T07:13:07.000Z">
+<meta property="article:modified_time" content="2024-04-19T07:35:06.820Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/%E7%AB%9E%E8%B5%9B%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="http://example.com/2024/04/19/%E6%95%B0%E7%BB%84-%E7%9F%A9%E9%98%B5/">
 
 
 <script id="page-configurations">
@@ -36,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Category: 竞赛笔记 | Hexo</title>
+  <title>数组/矩阵 | Hexo</title>
   
 
 
@@ -139,51 +144,109 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">竞赛笔记
-          <small>Category</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/19/%E6%95%B0%E7%BB%84-%E7%9F%A9%E9%98%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数组/矩阵
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-04-19 15:13:07 / Modified: 15:35:06" itemprop="dateCreated datePublished" datetime="2024-04-19T15:13:07+08:00">2024-04-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
+        <p>前言:学习数据结构中的数组&#x2F;矩阵</p>
+<span id="more"></span>
+
+<h2 id="数组-array"><a href="#数组-array" class="headerlink" title="数组(array)"></a>数组(array)</h2><h3 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h3><p>数组是一组偶对(下标值，数据元素值)的集合</p>
+<ul>
+<li>数组中，对于一组有意义的下标，都存在一个与其对应的值</li>
+<li>一维数组对应1个下标值，二维数组对应着2个下标值，以此类推</li>
+</ul>
+<p>数组是由n(n - 1)个具有相同数据类型的数据元素a<del>1</del>，a<del>2</del>,……，a<del>n</del>组成的有序序列，且<strong>该序列必须存储在一块地址连续的存储单元</strong></p>
+<ol>
+<li>数组中的数据元素具有相同类型</li>
+<li>数组是一种随机存取结构，给定一组下标，就可以访问与其对应的数据元素</li>
+<li>数组中的数据元素个数是固定的</li>
+</ol>
+<h3 id="数组-直观的n维数组"><a href="#数组-直观的n维数组" class="headerlink" title="数组:直观的n维数组"></a>数组:直观的n维数组</h3><p>以二维数组为例，……</p>
+<p>二维数组可看成一个定长的线性表，其每个元素又是一个定长的线性表</p>
+<p>设二维数组A &#x3D; (a<del>ij</del>)，则A &#x3D; (α<del>1</del>，α<del>2</del>，……，α<del>p</del>) (p &#x3D;m或n)</p>
+<p>其中，每个数据元素a</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-04-11T19:00:05+08:00"
-              content="2024-04-11">
-          04-11
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/04/11/%E5%9B%BD%E7%9C%81%E8%B5%9B-1/" itemprop="url">
-            <span itemprop="name">国省赛-1</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/17/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/" rel="prev" title="X86指令体系中的控制转移指令">
+      <i class="fa fa-chevron-left"></i> X86指令体系中的控制转移指令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/" rel="next" title="X86指令体系中的逻辑运算指令">
+      X86指令体系中的逻辑运算指令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -236,6 +299,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84-array"><span class="nav-number">1.</span> <span class="nav-text">数组(array)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">数组的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84-%E7%9B%B4%E8%A7%82%E7%9A%84n%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">数组:直观的n维数组</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

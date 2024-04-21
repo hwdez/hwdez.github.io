@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前言:学习X86指令体系中的控制转移指令">
+  <meta name="description" content="前言:学习X86指令体系中的逻辑运算指令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="X86指令体系中的控制转移指令">
-<meta property="og:url" content="http://example.com/2024/04/17/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:title" content="X86指令体系中的逻辑运算指令">
+<meta property="og:url" content="http://example.com/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言:学习X86指令体系中的控制转移指令">
+<meta property="og:description" content="前言:学习X86指令体系中的逻辑运算指令">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-04-16T23:59:53.000Z">
-<meta property="article:modified_time" content="2024-04-17T01:35:45.856Z">
+<meta property="article:published_time" content="2024-04-21T07:37:55.000Z">
+<meta property="article:modified_time" content="2024-04-21T08:25:50.832Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2024/04/17/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/">
+<link rel="canonical" href="http://example.com/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>X86指令体系中的控制转移指令 | Hexo</title>
+  <title>X86指令体系中的逻辑运算指令 | Hexo</title>
   
 
 
@@ -151,7 +151,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/17/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/21/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,7 +164,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          X86指令体系中的控制转移指令
+          X86指令体系中的逻辑运算指令
         </h1>
 
         <div class="post-meta">
@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2024-04-17 07:59:53 / Modified: 09:35:45" itemprop="dateCreated datePublished" datetime="2024-04-17T07:59:53+08:00">2024-04-17</time>
+              <time title="Created: 2024-04-21 15:37:55 / Modified: 16:25:50" itemprop="dateCreated datePublished" datetime="2024-04-21T15:37:55+08:00">2024-04-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -198,33 +198,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>前言:学习X86指令体系中的控制转移指令</p>
+        <p>前言:学习X86指令体系中的逻辑运算指令</p>
 <span id="more"></span>
 
-<h3 id="无条件转移指令"><a href="#无条件转移指令" class="headerlink" title="无条件转移指令"></a>无条件转移指令</h3><p>指令格式:JMP  LABLE</p>
-<p>LABLE是将要转移到的目标地址，那LABLE是否与当前指令在一个代码段，无条件转移可分为<strong>段内转移</strong>(16位地址)和<strong>段间转移</strong>(20位地址)；而按LABLE的不同寻址方式又可以分为直接寻址和间接寻址。</p>
-<p><strong>直接寻址</strong>:转移地址在指令代码中</p>
-<p><strong>间接地址</strong>:转移地址在寄存器或内存单元</p>
-<h4 id="段内转移"><a href="#段内转移" class="headerlink" title="段内转移"></a>段内转移</h4><p>在当前代码段范围64KB内转移(±32KB范围)成为近转移(NEAR PTR)。转移范围在段内**-128至+127<strong>范围内称为</strong>短转移**(SHORT)。段内转移<strong>CS段地址不变</strong>，只要改变<strong>IP的偏移地址</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JMP SHORT LABLE  ;短转移，直接寻址，目标地址为LABLE</span><br><span class="line">LMP NEAR PTR LABLE  ;近转移，直接寻址，目标地址为LABLE(NEAR不写)(NEAR不写默认是段内近转移)</span><br><span class="line">JMP SI  ;间接寻址，目标地址在SI寄存器中(IP的内容由SI提供)</span><br><span class="line">JMP WORD PTR [BX]  ;间接寻址，目标地址在内存单元中(执行完后IP = BX的地址为内容，地址内容才是转移的部分)</span><br></pre></td></tr></table></figure>
+<p>逻辑运算指令分为单操作数指令，也有双操作数指令。操作数可为8位或16位二进制数。双操作数指令不允许两个操作数都是存储器操作数，目的操作数不能是立即数。<strong>两个操作数的位数要一样</strong></p>
+<h4 id="逻辑与运算指令AND"><a href="#逻辑与运算指令AND" class="headerlink" title="逻辑与运算指令AND"></a>逻辑与运算指令AND</h4><p>指令格式:AND OPD,OPS</p>
+<p>指令功能:对两个操作数执行 逻辑与运算，结果送到目的操作数，即OPD&amp;&amp;OPS  ➡  OPD</p>
+<p>对标志位的影响:设置CF &#x3D; OF &#x3D; 0，根据结果确定SF、ZF和PF状态，而对AF未定义</p>
+<h3 id="逻辑或运算OR"><a href="#逻辑或运算OR" class="headerlink" title="逻辑或运算OR"></a>逻辑或运算OR</h3><p>指令格式:OR OPD，OPS</p>
+<p>指令功能:对两个操作数进行逻辑或运算，结果送到目的操作数，即OPD || OPS  ➡  OPD</p>
+<p>对标志位的影响同AND</p>
+<h3 id="逻辑非指令NOT"><a href="#逻辑非指令NOT" class="headerlink" title="逻辑非指令NOT"></a>逻辑非指令NOT</h3><p>指令格式:NOT OPD</p>
+<p>指令功能:对一个操作数执行逻辑非运算。不影响标志位</p>
+<h3 id="逻辑异或运算XOR"><a href="#逻辑异或运算XOR" class="headerlink" title="逻辑异或运算XOR"></a>逻辑异或运算XOR</h3><p>指令格式:XOR OPD,OPS</p>
+<p>指令功能:对两个操作数执行逻辑异或运算，结果送到目的操作数。对标志位的影响同AND指令</p>
+<h3 id="测试指令TEST"><a href="#测试指令TEST" class="headerlink" title="测试指令TEST"></a>测试指令TEST</h3><p>指令格式:TEST  OPD，OPS</p>
+<p>指令功能:对两个操作数执行逻辑与运算，结果不回送到目的操作数。OPD&amp;&amp;OPS，结果不回送OPD，仅建立结果状态标志</p>
+<p>TEST指令可用于检测一些条件是否满足，但又不会改变原操作数的内容</p>
+<h3 id="逻辑运算指令的应用"><a href="#逻辑运算指令的应用" class="headerlink" title="逻辑运算指令的应用"></a>逻辑运算指令的应用</h3><h4 id="AND指令可用于屏蔽某些位"><a href="#AND指令可用于屏蔽某些位" class="headerlink" title="AND指令可用于屏蔽某些位"></a>AND指令可用于屏蔽某些位</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AND BL,11110110B  ;将BL中的D0和D3位清零，其他位不变</span><br><span class="line">AND AL,0FH        ;屏蔽AL高四位，保留低四位(常用)</span><br></pre></td></tr></table></figure>
 
+<h4 id="OR指令可用于置某些位为1"><a href="#OR指令可用于置某些位为1" class="headerlink" title="OR指令可用于置某些位为1"></a>OR指令可用于置某些位为1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">or BL,00001001B   ;将BL中的D3和D0位置1</span><br><span class="line">or AX,AX          ;置标志位，这一条指令没有改变AX的值，但是改变了标志</span><br><span class="line">                  ;寄存器的值，可以反应出AX的标志状态，在程序中经常使用</span><br></pre></td></tr></table></figure>
 
+<h4 id="TEST测试某位是否为0"><a href="#TEST测试某位是否为0" class="headerlink" title="TEST测试某位是否为0"></a>TEST测试某位是否为0</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov AL,0EFH</span><br><span class="line">TEST AL,40H</span><br></pre></td></tr></table></figure>
 
-<h4 id="段间转移"><a href="#段间转移" class="headerlink" title="段间转移"></a>段间转移</h4><p>远转移(FAR PTR)从当前代码段</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试AL寄存器中的D<del>6</del>位是否为0。40H的D<del>6</del>位为1，其余各位为0。指令TEST做相与运算，如果AL的D<del>6</del>位为0，结果一定为0</p>
+<p>指令TEST执行后可根据状态位ZF的状态来判断AL寄存器的D<del>6</del>位是否为0，但没有改变AL寄存器的内容</p>
+<h4 id="对指定位求反"><a href="#对指定位求反" class="headerlink" title="对指定位求反"></a>对指定位求反</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XOR BL,0FH  ;BL高四位不变，低四位求反</span><br><span class="line">XOR AL,55H  ;AL偶数位不变，奇数位求反</span><br></pre></td></tr></table></figure>
 
-<h3 id="条件转移语句JCC"><a href="#条件转移语句JCC" class="headerlink" title="条件转移语句JCC"></a>条件转移语句JCC</h3><p>条件转移语句都是<strong>段内短转移</strong></p>
-<p>条件转移指令的一般格式:JCC(没这个指令，表示形式)  LABLE</p>
-<p>指令中的条件即为状态标志的状态，条件转移指令可以分为三类:判断单个标志位状态</p>
-<h4 id="判断单个标志位状态"><a href="#判断单个标志位状态" class="headerlink" title="判断单个标志位状态"></a>判断单个标志位状态</h4><h4 id="比较无符号数高低-条件为一个标志或标志组合"><a href="#比较无符号数高低-条件为一个标志或标志组合" class="headerlink" title="比较无符号数高低(条件为一个标志或标志组合)"></a><strong>比较无符号数高低</strong>(条件为一个标志或标志组合)</h4><h4 id="比较有符号数大小（条件为标志组合）"><a href="#比较有符号数大小（条件为标志组合）" class="headerlink" title="比较有符号数大小（条件为标志组合）"></a><strong>比较有符号数大小（条件为标志组合）</strong></h4><h4 id="测试CX的值为0，则转移的指令"><a href="#测试CX的值为0，则转移的指令" class="headerlink" title="测试CX的值为0，则转移的指令"></a><strong>测试</strong>CX的值为0，则转移的指令</h4><h3 id="循环控制指令"><a href="#循环控制指令" class="headerlink" title="循环控制指令"></a>循环控制指令</h3><p>循环指令默认利用CX计数器，属于段内短转移。</p>
-<p>指令格式:</p>
-<p>LOOP LABLE</p>
-<ul>
-<li><strong>在执行之前CX先-1，判断是否为0，若是的话,执行loop的下一句反之LABLE中执行</strong></li>
-</ul>
-<p>LOOPZ&#x2F;LOOPE LABLE</p>
-<p>LOOPNZ&#x2F;LOOPNE LABLE</p>
-<h3 id="子程序条用及返回指令"><a href="#子程序条用及返回指令" class="headerlink" title="子程序条用及返回指令"></a>子程序条用及返回指令</h3><h4 id="子程序调用指令CALL"><a href="#子程序调用指令CALL" class="headerlink" title="子程序调用指令CALL"></a>子程序调用指令CALL</h4><p>CALL指令位于主程序，CALL调用的子程序与CALL指令可以处于同一代码段内，也可以在不同的代码段，因而分段内调用和段间调用。段内直接调用、段内间接调用、段间直接调用、段间间接调用</p>
+<h4 id="清除寄存器及CF-常用指令"><a href="#清除寄存器及CF-常用指令" class="headerlink" title="清除寄存器及CF(常用指令)"></a>清除寄存器及CF(常用指令)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XOR AX，AX  ;AX = 0,CF = 0</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -243,13 +245,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/04/17/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4/" rel="prev" title="移位指令">
-      <i class="fa fa-chevron-left"></i> 移位指令
+    <a href="/2024/04/19/%E6%95%B0%E7%BB%84-%E7%9F%A9%E9%98%B5/" rel="prev" title="数组/矩阵">
+      <i class="fa fa-chevron-left"></i> 数组/矩阵
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/04/19/%E6%95%B0%E7%BB%84-%E7%9F%A9%E9%98%B5/" rel="next" title="数组/矩阵">
-      数组/矩阵 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -308,7 +307,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">无条件转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AE%B5%E5%86%85%E8%BD%AC%E7%A7%BB"><span class="nav-number">1.1.</span> <span class="nav-text">段内转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AE%B5%E9%97%B4%E8%BD%AC%E7%A7%BB"><span class="nav-number">1.2.</span> <span class="nav-text">段间转移</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E8%AF%AD%E5%8F%A5JCC"><span class="nav-number">2.</span> <span class="nav-text">条件转移语句JCC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%8D%95%E4%B8%AA%E6%A0%87%E5%BF%97%E4%BD%8D%E7%8A%B6%E6%80%81"><span class="nav-number">2.1.</span> <span class="nav-text">判断单个标志位状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%E9%AB%98%E4%BD%8E-%E6%9D%A1%E4%BB%B6%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%A0%87%E5%BF%97%E6%88%96%E6%A0%87%E5%BF%97%E7%BB%84%E5%90%88"><span class="nav-number">2.2.</span> <span class="nav-text">比较无符号数高低(条件为一个标志或标志组合)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%A4%A7%E5%B0%8F%EF%BC%88%E6%9D%A1%E4%BB%B6%E4%B8%BA%E6%A0%87%E5%BF%97%E7%BB%84%E5%90%88%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">比较有符号数大小（条件为标志组合）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95CX%E7%9A%84%E5%80%BC%E4%B8%BA0%EF%BC%8C%E5%88%99%E8%BD%AC%E7%A7%BB%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="nav-number">2.4.</span> <span class="nav-text">测试CX的值为0，则转移的指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">循环控制指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%A8%8B%E5%BA%8F%E6%9D%A1%E7%94%A8%E5%8F%8A%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">子程序条用及返回指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%A8%8B%E5%BA%8F%E8%B0%83%E7%94%A8%E6%8C%87%E4%BB%A4CALL"><span class="nav-number">4.1.</span> <span class="nav-text">子程序调用指令CALL</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E4%B8%8E%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4AND"><span class="nav-number">1.</span> <span class="nav-text">逻辑与运算指令AND</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E6%88%96%E8%BF%90%E7%AE%97OR"><span class="nav-number"></span> <span class="nav-text">逻辑或运算OR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E9%9D%9E%E6%8C%87%E4%BB%A4NOT"><span class="nav-number"></span> <span class="nav-text">逻辑非指令NOT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97XOR"><span class="nav-number"></span> <span class="nav-text">逻辑异或运算XOR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%8C%87%E4%BB%A4TEST"><span class="nav-number"></span> <span class="nav-text">测试指令TEST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number"></span> <span class="nav-text">逻辑运算指令的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AND%E6%8C%87%E4%BB%A4%E5%8F%AF%E7%94%A8%E4%BA%8E%E5%B1%8F%E8%94%BD%E6%9F%90%E4%BA%9B%E4%BD%8D"><span class="nav-number">1.</span> <span class="nav-text">AND指令可用于屏蔽某些位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OR%E6%8C%87%E4%BB%A4%E5%8F%AF%E7%94%A8%E4%BA%8E%E7%BD%AE%E6%9F%90%E4%BA%9B%E4%BD%8D%E4%B8%BA1"><span class="nav-number">2.</span> <span class="nav-text">OR指令可用于置某些位为1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TEST%E6%B5%8B%E8%AF%95%E6%9F%90%E4%BD%8D%E6%98%AF%E5%90%A6%E4%B8%BA0"><span class="nav-number">3.</span> <span class="nav-text">TEST测试某位是否为0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%8C%87%E5%AE%9A%E4%BD%8D%E6%B1%82%E5%8F%8D"><span class="nav-number">4.</span> <span class="nav-text">对指定位求反</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E5%AF%84%E5%AD%98%E5%99%A8%E5%8F%8ACF-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">清除寄存器及CF(常用指令)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
