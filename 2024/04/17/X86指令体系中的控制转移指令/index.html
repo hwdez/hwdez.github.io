@@ -27,11 +27,15 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言:学习X86指令体系中的控制转移指令">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/20210501214228649.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240422221226926.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240422221518167.png">
 <meta property="article:published_time" content="2024-04-16T23:59:53.000Z">
-<meta property="article:modified_time" content="2024-04-17T01:35:45.856Z">
+<meta property="article:modified_time" content="2024-04-22T15:07:26.736Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/$%7Bfiilename%7D/20210501214228649.png">
 
 <link rel="canonical" href="http://example.com/2024/04/17/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%8E%A7%E5%88%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/">
 
@@ -173,10 +177,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-04-17 07:59:53 / Modified: 09:35:45" itemprop="dateCreated datePublished" datetime="2024-04-17T07:59:53+08:00">2024-04-17</time>
+              <time title="Created: 2024-04-17 07:59:53" itemprop="dateCreated datePublished" datetime="2024-04-17T07:59:53+08:00">2024-04-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-04-22 23:07:26" itemprop="dateModified" datetime="2024-04-22T23:07:26+08:00">2024-04-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -202,29 +212,61 @@
 <span id="more"></span>
 
 <h3 id="无条件转移指令"><a href="#无条件转移指令" class="headerlink" title="无条件转移指令"></a>无条件转移指令</h3><p>指令格式:JMP  LABLE</p>
-<p>LABLE是将要转移到的目标地址，那LABLE是否与当前指令在一个代码段，无条件转移可分为<strong>段内转移</strong>(16位地址)和<strong>段间转移</strong>(20位地址)；而按LABLE的不同寻址方式又可以分为直接寻址和间接寻址。</p>
+<p>LABLE是将要转移到的目标地址，那LABLE是否与当前指令在一个代码段，无条件转移可分为<strong>段内转移</strong>(16位地址)和<strong>段间转移</strong>(20位地址)；而按LABLE的不同寻址方式又可以分为<strong>直接寻址</strong>和<strong>间接寻址</strong>。</p>
 <p><strong>直接寻址</strong>:转移地址在指令代码中</p>
 <p><strong>间接地址</strong>:转移地址在寄存器或内存单元</p>
-<h4 id="段内转移"><a href="#段内转移" class="headerlink" title="段内转移"></a>段内转移</h4><p>在当前代码段范围64KB内转移(±32KB范围)成为近转移(NEAR PTR)。转移范围在段内**-128至+127<strong>范围内称为</strong>短转移**(SHORT)。段内转移<strong>CS段地址不变</strong>，只要改变<strong>IP的偏移地址</strong></p>
+<h4 id="段内转移"><a href="#段内转移" class="headerlink" title="段内转移"></a>段内转移</h4><p>在当前代码段范围<strong>64KB内转移</strong>(<strong>±32KB范围)<strong>成为</strong>近转移(NEAR PTR)<strong>。转移范围在段内</strong>-128至+127</strong>范围内称为<strong>短转移(SHORT)<strong>。段内转移</strong>CS段地址不变</strong>，<strong>只要改变IP的偏移地址</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JMP SHORT LABLE  ;短转移，直接寻址，目标地址为LABLE</span><br><span class="line">LMP NEAR PTR LABLE  ;近转移，直接寻址，目标地址为LABLE(NEAR不写)(NEAR不写默认是段内近转移)</span><br><span class="line">JMP SI  ;间接寻址，目标地址在SI寄存器中(IP的内容由SI提供)</span><br><span class="line">JMP WORD PTR [BX]  ;间接寻址，目标地址在内存单元中(执行完后IP = BX的地址为内容，地址内容才是转移的部分)</span><br></pre></td></tr></table></figure>
 
-
-
-<h4 id="段间转移"><a href="#段间转移" class="headerlink" title="段间转移"></a>段间转移</h4><p>远转移(FAR PTR)从当前代码段</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="段间转移"><a href="#段间转移" class="headerlink" title="段间转移"></a>段间转移</h4><p><strong>远转移(FAR PTR)<strong>从当前代码段转移到另一个代码段(设为代码段2)，</strong>转移范围为1MB</strong>。需要<strong>改变CS段地址和IP段地址</strong>。因此目标地址必须用一个32位数表达</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JMP  FAR PTR LABLE ;远转移到代码段2的LABLE,IP ← [LABLE]，CS ← [代码段2的段地址]</span><br><span class="line">JMP  FAR PTR MEM   ;MEM是内存单元的地址，从MEM开始的4个连续单元中存放着2个16位的地址，一个是目标地址的偏移地址，一个是目标地址的段地址，即IP ← [MEM]，CS ← [MEM + 2]</span><br></pre></td></tr></table></figure>
 
 <h3 id="条件转移语句JCC"><a href="#条件转移语句JCC" class="headerlink" title="条件转移语句JCC"></a>条件转移语句JCC</h3><p>条件转移语句都是<strong>段内短转移</strong></p>
-<p>条件转移指令的一般格式:JCC(没这个指令，表示形式)  LABLE</p>
-<p>指令中的条件即为状态标志的状态，条件转移指令可以分为三类:判断单个标志位状态</p>
-<h4 id="判断单个标志位状态"><a href="#判断单个标志位状态" class="headerlink" title="判断单个标志位状态"></a>判断单个标志位状态</h4><h4 id="比较无符号数高低-条件为一个标志或标志组合"><a href="#比较无符号数高低-条件为一个标志或标志组合" class="headerlink" title="比较无符号数高低(条件为一个标志或标志组合)"></a><strong>比较无符号数高低</strong>(条件为一个标志或标志组合)</h4><h4 id="比较有符号数大小（条件为标志组合）"><a href="#比较有符号数大小（条件为标志组合）" class="headerlink" title="比较有符号数大小（条件为标志组合）"></a><strong>比较有符号数大小（条件为标志组合）</strong></h4><h4 id="测试CX的值为0，则转移的指令"><a href="#测试CX的值为0，则转移的指令" class="headerlink" title="测试CX的值为0，则转移的指令"></a><strong>测试</strong>CX的值为0，则转移的指令</h4><h3 id="循环控制指令"><a href="#循环控制指令" class="headerlink" title="循环控制指令"></a>循环控制指令</h3><p>循环指令默认利用CX计数器，属于段内短转移。</p>
+<p>条件转移指令的一般格式:JCC  LABLE(没这个指令，表示形式) </p>
+<p>指令功能:如满足条件，则发生转移:<strong>IP  ←  IP + 8位偏移量</strong>；若条件不满足，则不转移，顺序执行下一条指令。<strong>转移范围与JMP  SHORT指令相同</strong></p>
+<p>指令中的<strong>条件</strong>即为<strong>状态标志的状态</strong>，条件转移指令可以分为三类:判断单个标志位状态、比较无符号数高低、比较有符号数大小</p>
+<h4 id="判断单个标志位状态"><a href="#判断单个标志位状态" class="headerlink" title="判断单个标志位状态"></a>判断单个标志位状态</h4><ol>
+<li>JZ&#x2F;JE和JNZ&#x2F;JNE:利用零标志位ZF，判断结果是否为零(或相等)</li>
+<li>JS和JNS:利用符号标志位SF，判断结果是正是负</li>
+<li>JO和JNO:利用溢出标志位OF，判断结果是否产生溢出</li>
+<li>JP&#x2F;JPE和JNP&#x2F;JPO:利用奇偶标志位PF，判断结果中”1”的个数是偶还是奇</li>
+<li>JC&#x2F;JB&#x2F;JNAE和JNC&#x2F;JNB&#x2F;JAE:利用进位标志CF，判断结果是否进位或错位<img src="/../imgs/$%7Bfiilename%7D/20210501214228649.png" alt="在这里插入图片描述"></li>
+</ol>
+<p>指令中的Z、S、O、C、P分别表示标志寄存器中的ZF 、SF、OF、CF、PF标志位，指令中的N表示不等(Not)，E表示相等(Equal)</p>
+<h4 id="比较无符号数高低-条件为一个标志或标志组合"><a href="#比较无符号数高低-条件为一个标志或标志组合" class="headerlink" title="比较无符号数高低(条件为一个标志或标志组合)"></a><strong>比较无符号数高低</strong>(条件为一个标志或标志组合)</h4><p>比较无符号数用高低表示。指令中A表示<strong>高(Above)<strong>，B表示</strong>低(Below)<strong>，利用</strong>CF确定高低</strong>，利用<strong>ZF确定相等</strong></p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240422221226926.png" alt="image-20240422221226926"></p>
+<h4 id="比较有符号数大小（条件为标志组合）"><a href="#比较有符号数大小（条件为标志组合）" class="headerlink" title="比较有符号数大小（条件为标志组合）"></a><strong>比较有符号数大小（条件为标志组合）</strong></h4><p>判断有符号数的大小需要组合OF、SF标志，并利用ZF标志确定相等。指令的G表示大(Great)，L表示小(Less)</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240422221518167.png" alt="image-20240422221518167"></p>
+<h4 id="测试CX的值为0，则转移的指令"><a href="#测试CX的值为0，则转移的指令" class="headerlink" title="测试CX的值为0，则转移的指令"></a><strong>测试</strong>CX的值为0，则转移的指令</h4><p>指令格式:JCXZ  LABLE</p>
+<p>指令功能:若<strong>CX的寄存器的内容为零</strong>，则转移到指定地址标号处</p>
+<h3 id="循环控制指令"><a href="#循环控制指令" class="headerlink" title="循环控制指令"></a>循环控制指令</h3><p>循环指令默认利用CX计数器，属于<strong>段内短转移</strong>。</p>
 <p>指令格式:</p>
 <p>LOOP LABLE</p>
 <ul>
-<li><strong>在执行之前CX先-1，判断是否为0，若是的话,执行loop的下一句反之LABLE中执行</strong></li>
+<li>执行前CX先减1，如果不为0，则转到LABLE执行，否则顺序执行</li>
 </ul>
 <p>LOOPZ&#x2F;LOOPE LABLE</p>
+<ul>
+<li>执行前CX先减1，如果不为0且ZF &#x3D; 1，则转到LABLE执行，否则顺序执行</li>
+</ul>
 <p>LOOPNZ&#x2F;LOOPNE LABLE</p>
+<ul>
+<li>执行前CX先减1，如果不为0且ZF &#x3D; 0，则转到LABLE执行，否则顺序执行</li>
+</ul>
 <h3 id="子程序条用及返回指令"><a href="#子程序条用及返回指令" class="headerlink" title="子程序条用及返回指令"></a>子程序条用及返回指令</h3><h4 id="子程序调用指令CALL"><a href="#子程序调用指令CALL" class="headerlink" title="子程序调用指令CALL"></a>子程序调用指令CALL</h4><p>CALL指令位于主程序，CALL调用的子程序与CALL指令可以处于同一代码段内，也可以在不同的代码段，因而分段内调用和段间调用。段内直接调用、段内间接调用、段间直接调用、段间间接调用</p>
+<p>指令中”<strong>NEAR PTR</strong>“表示<strong>段内调用</strong>，”<strong>FAR PTR</strong>“表示<strong>段间调用</strong>。汇编程序自动识别”段内”，故可以省略</p>
+<p>返回指令<strong>RET</strong>为子程序最后执行的指令，作用为断点出栈，将堆栈中存放的CALL指令的下一条指令的<strong>段地址、偏移地址送给CS、IP(低位CS、高位IP)</strong></p>
+<p>RET指令根据段内和段间、有无参数，分成四种类型，需要弹出CALL指令压入堆栈的返回地址</p>
+<p>指令格式:</p>
+<ol>
+<li>RET      ;无参数段内返回</li>
+<li>RET n   ;有参数段内返回</li>
+<li>RET      ;无参数段间返回</li>
+<li>RET n   ;有参数段间返回</li>
+</ol>
+<p>段内返回的功能:偏移地址IP出栈，IP  ←  SS:[SP]，SP  ←  SP + 2</p>
+<p>段间返回的功能:偏移地址IP和段地址CS出栈，IP  ←  SS:[SP]，SP  ←  SP + 2，CS  ←  SS:[SP]，SP  ←  SP + 2</p>
+<p>RET n为有参数返回，n为1个16位立即数，则堆栈指针SP将增加，即SP  ←  SP + n。主要用于程序可以方便地从堆栈中去除若干个执行CALL指令以前的入栈的参数</p>
 
     </div>
 
@@ -322,7 +364,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

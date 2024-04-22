@@ -28,7 +28,7 @@
 <meta property="og:description" content="前言:学习数据结构中的数组&#x2F;矩阵">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-19T07:13:07.000Z">
-<meta property="article:modified_time" content="2024-04-19T07:35:06.820Z">
+<meta property="article:modified_time" content="2024-04-22T09:06:02.174Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-04-19 15:13:07 / Modified: 15:35:06" itemprop="dateCreated datePublished" datetime="2024-04-19T15:13:07+08:00">2024-04-19</time>
+              <time title="Created: 2024-04-19 15:13:07" itemprop="dateCreated datePublished" datetime="2024-04-19T15:13:07+08:00">2024-04-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-04-22 17:06:02" itemprop="dateModified" datetime="2024-04-22T17:06:02+08:00">2024-04-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -206,7 +212,7 @@
 <li>数组中，对于一组有意义的下标，都存在一个与其对应的值</li>
 <li>一维数组对应1个下标值，二维数组对应着2个下标值，以此类推</li>
 </ul>
-<p>数组是由n(n - 1)个具有相同数据类型的数据元素a<del>1</del>，a<del>2</del>,……，a<del>n</del>组成的有序序列，且<strong>该序列必须存储在一块地址连续的存储单元</strong></p>
+<p>数组是由n(n - 1)<strong>个具有相同数据类型的数据元素</strong>a<del>1</del>，a<del>2</del>,……，a<del>n</del>组成的有序序列，且<strong>该序列必须存储在一块地址连续的存储单元</strong></p>
 <ol>
 <li>数组中的数据元素具有相同类型</li>
 <li>数组是一种随机存取结构，给定一组下标，就可以访问与其对应的数据元素</li>
@@ -215,7 +221,10 @@
 <h3 id="数组-直观的n维数组"><a href="#数组-直观的n维数组" class="headerlink" title="数组:直观的n维数组"></a>数组:直观的n维数组</h3><p>以二维数组为例，……</p>
 <p>二维数组可看成一个定长的线性表，其每个元素又是一个定长的线性表</p>
 <p>设二维数组A &#x3D; (a<del>ij</del>)，则A &#x3D; (α<del>1</del>，α<del>2</del>，……，α<del>p</del>) (p &#x3D;m或n)</p>
-<p>其中，每个数据元素a</p>
+<p>其中，每个数据元素a<del>j</del>是一个列向量(线性表):</p>
+<p>a<del>j</del> &#x3D; (a<del>j1</del>，a<del>2j</del>，……，a<del>mj)</del>  1≤j≤n</p>
+<p>或是一个行向量:</p>
+<p>a<del>i</del> &#x3D; (a<del>i1</del>，a<del>i2</del>，……，a<del>in</del>)  1≤i≤m</p>
 
     </div>
 
@@ -313,7 +322,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
