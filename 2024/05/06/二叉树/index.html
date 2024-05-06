@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言:学习数据结构中的二叉树，很重要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树">
+<meta property="og:url" content="http://example.com/2024/05/06/%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言:学习数据结构中的二叉树，很重要">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506101223509.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506101743522.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506102557255.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506103141969.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506103614399.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506103900990.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506104450820.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506105007195.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506105304086.png">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506115150403.png">
+<meta property="article:published_time" content="2024-05-06T01:58:55.000Z">
+<meta property="article:modified_time" content="2024-05-06T04:00:49.993Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240506101223509.png">
+
+<link rel="canonical" href="http://example.com/2024/05/06/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>二叉树 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/06/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二叉树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-05-06 09:58:55 / Modified: 12:00:49" itemprop="dateCreated datePublished" datetime="2024-05-06T09:58:55+08:00">2024-05-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>前言:学习数据结构中的二叉树，很重要</p>
+<span id="more"></span>
+
+<h3 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h3><p>树:是具有n(n ≥ 0)个结点的有限集合T，n &#x3D; 0时称为空树，否则:</p>
+<ol>
+<li>有且只有一个特殊的称为树的根节点(ROOT)；</li>
+<li>若n &gt; 1时，其余的结点被分为m(m &gt; 0)个互不相交的子集T<del>1</del>，T<del>2</del>，T<del>3</del>，……，T<del>m</del>，其中每个子集T<del>i</del>本身又是一棵树，称其为根的子树(Subtree)</li>
+</ol>
+<h3 id="树的基本术语"><a href="#树的基本术语" class="headerlink" title="树的基本术语"></a>树的基本术语</h3><ol>
+<li><p>结点(node)：</p>
+<p>一个数据元素及其若干指向其子树的分支</p>
+</li>
+<li><p>结点的度(degree)、树的度:</p>
+<p>结点所拥有的子树的棵数称为结点的度</p>
+<p>树中结点度最大值称为树的度</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240506101223509.png" alt="image-20240506101223509"></p>
+</li>
+<li><p>叶子(left)结点、非叶子结点:</p>
+<p>树中度为0的结点称为叶子结点(或终端结点)</p>
+<p>相应的，度不为0的结点称为非叶子结点(或非终端结点、分支结点)</p>
+<p>——<u>除根结点外的分支结点称为内部结点</u></p>
+</li>
+<li><p>孩子结点、双亲结点、兄弟结点</p>
+<p>一个结点的子树的根称为该结点的孩子结点(child)&#x2F;子结点</p>
+<p>相应的，该结点是其孩子结点的双亲结点(parent)或父结点</p>
+<p>同一双亲结点的所有子结点互称为兄弟结点</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240506101743522.png" alt="image-20240506101743522"></p>
+</li>
+<li><p>层次、堂兄弟结点</p>
+<p>规定:树中根结点的层次为1，其余结点的层次 &#x3D; 其双亲结点的层次 + 1</p>
+<p>双亲结点在同意层上的所有结点互称为堂兄弟结点(兄弟结点是特殊的堂兄弟结点)</p>
+</li>
+<li><p>树的深度(depth)&#x2F;树的高度(height)，结点的高度</p>
+<p>树中结点的最大层次值，称为树的深度，又称为树的高度</p>
+<p>树中的结点的高度为:以该结点为根的子树的高度</p>
+<p>——根结点(A)的高度，即为整棵树的高度</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240506102557255.png" alt="image-20240506102557255"></p>
+</li>
+<li><p>结点的层次路径、祖先、子孙:</p>
+<p>从根结点开始，到达某结点X所经过的所有结点称为结点X的层次路径(有且只有一条)</p>
+<p>结点X的层次路径上的所有结点(X除外)称为X的祖先(ancestor)</p>
+<p>以某一结点为根的子树中的任意结点称为该结点的子孙结点(descent)</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240506103141969.png" alt="image-20240506103141969"></p>
+</li>
+<li><p>有序树和无序树:</p>
+<p>如果树T的每一个结点的子树(若有)具有一定的次序，则该子树称为有序树，否则称为无序树</p>
+<p>如果树中的结点的个子树看成从左到右是有次序的(即:不能互换)，则称为该树为有序树，否则为无序树</p>
+</li>
+<li><p>森林(forest):是m(m ≥ 0)棵互不相交的树的集合</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240506103614399.png" alt="image-20240506103614399"></p>
+</li>
+</ol>
+<h3 id="二叉树-Binary-Tree"><a href="#二叉树-Binary-Tree" class="headerlink" title="二叉树(Binary Tree)"></a>二叉树(Binary Tree)</h3><h4 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a>二叉树的定义</h4><p>对于二叉树T来说，若n &gt; 1时，其余的结点被分为两个互不相交的子集T<del>1</del>，T<del>2</del>，分别称为左、右子树、并且左右子树都是二叉树</p>
+<h4 id="二叉树的基本形态"><a href="#二叉树的基本形态" class="headerlink" title="二叉树的基本形态"></a>二叉树的基本形态</h4><p><img src="/../imgs/$%7Bfiilename%7D/image-20240506103900990.png" alt="image-20240506103900990"></p>
+<h4 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h4><ol>
+<li><p>在非空二叉树中，第i层上至多有2^i-1^个结点(i ≥ 1)</p>
+</li>
+<li><p>深度为k的二叉树至多有2^k^-1个结点(k ≥ 1)</p>
+</li>
+<li><p>满&amp;完全二叉树</p>
+<p>一棵深度为k且有2^k^-1个结点的二叉树称为”满二叉树”</p>
+<p>如果深度为k，有n个结点的二叉树，当且仅当其每一个结点都与深度为k的满二叉树中编号从1到h的结点一一对应，该二叉树称为完全二叉树</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240506104450820.png" alt="image-20240506104450820"></p>
+</li>
+<li><p>对任何一棵非空二叉树，若其叶子结点数为n<del>0</del>，度为2的节点数为n<del>2</del>，则n<del>0</del> &#x3D; n<del>2</del> + 1</p>
+<p>任一二叉树中，0度结点比2度结点多一个</p>
+</li>
+<li><p>n个结点的完全二叉树深度为:n个结点的完全二叉树深度为:<img src="/../imgs/$%7Bfiilename%7D/image-20240506105007195.png" alt="image-20240506105007195"></p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240506105304086.png" alt="image-20240506105304086"></p>
+</li>
+<li><p>对一棵有n个结点的完全二叉树(深度为log₂(n) + 1向下取整)，结点按层序(从第一层到第[log₂(n) + 1向下取整])自左至右进行编号，则对于编号为i(1 ≤ i ≤ n)的结点:</p>
+<ul>
+<li>若i &#x3D; 1，则结点i是二叉树的根，无双亲结点；否则若i &gt; 1，则其双亲结点编号是(i&#x2F;2向下取整)</li>
+<li>若2i &gt;  n，则结点i为叶子结点，无左孩子；否则，其左孩子结点编号为2i</li>
+<li>若2i + 1 &gt; n，则结点i无右孩子；否则，其右孩子结点编号是2I + 1</li>
+</ul>
+</li>
+</ol>
+<h3 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h3><h4 id="顺序存储结构——基于完全二叉树实现"><a href="#顺序存储结构——基于完全二叉树实现" class="headerlink" title="顺序存储结构——基于完全二叉树实现"></a>顺序存储结构——基于完全二叉树实现</h4><p>用一组地址连续的存储单元依次”自上而下，自左向右”存储数据元素</p>
+<p>顺序存储结构的类型定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_SIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> elemtype sqbitree[MAX_SIZE];</span><br></pre></td></tr></table></figure>
+
+<p>最坏情况下，一个深度为k且只有k个结点的单支树，需要长度为2^k^-1的一维数组</p>
+<h4 id="链式存储结构——基于2-3叉链表实现"><a href="#链式存储结构——基于2-3叉链表实现" class="headerlink" title="链式存储结构——基于2&amp;3叉链表实现"></a>链式存储结构——基于2&amp;3叉链表实现</h4><p><img src="/../imgs/$%7Bfiilename%7D/image-20240506115150403.png" alt="image-20240506115150403"></p>
+<ul>
+<li><p>二叉链表结点:</p>
+<p>有三个域:数据域，两个分别指向左右子结点的指针域；</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">btnode</span>&#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">btnode</span> *Lchild,*Rchild;</span><br><span class="line">&#125;BTNode;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>三叉链表结点:</p>
+<p>除二叉链表的三个域外，再增加一个指向父结点的指针域</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">btnode3</span>&#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    dtruct btnode3 *Lchild, *Rchild, *parent;</span><br><span class="line">&#125;BTNode3;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/05/04/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/" rel="prev" title="X86指令体系下的字符串操作指令">
+      <i class="fa fa-chevron-left"></i> X86指令体系下的字符串操作指令
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">树的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">2.</span> <span class="nav-text">树的基本术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91-Binary-Tree"><span class="nav-number">3.</span> <span class="nav-text">二叉树(Binary Tree)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">3.1.</span> <span class="nav-text">二叉树的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BD%A2%E6%80%81"><span class="nav-number">3.2.</span> <span class="nav-text">二叉树的基本形态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.3.</span> <span class="nav-text">二叉树的性质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">二叉树的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.1.</span> <span class="nav-text">顺序存储结构——基于完全二叉树实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E2-3%E5%8F%89%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.</span> <span class="nav-text">链式存储结构——基于2&amp;3叉链表实现</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
