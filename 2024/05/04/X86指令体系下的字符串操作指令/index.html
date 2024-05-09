@@ -28,7 +28,7 @@
 <meta property="og:description" content="前言:学习X86指令体系下的字符串操作指令">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-05-04T15:43:52.000Z">
-<meta property="article:modified_time" content="2024-05-04T17:25:58.750Z">
+<meta property="article:modified_time" content="2024-05-08T12:09:52.429Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-05-05 01:25:58" itemprop="dateModified" datetime="2024-05-05T01:25:58+08:00">2024-05-05</time>
+                <time title="Modified: 2024-05-08 20:09:52" itemprop="dateModified" datetime="2024-05-08T20:09:52+08:00">2024-05-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -213,7 +213,7 @@
 <p>每执行一次串操作指令，SI和DI都会自动修改:±1(字符串)或±2(字串)</p>
 <p>如何确定＋还是➖呢？通过两个指令CLD和STD来确定:执行指令CLD指令后，DF &#x3D; 0，地址指针增1或2；执行STD指令之后，DF &#x3D; 1，地址指针减1或2</p>
 <p>在操作数指令执行前都应明确给出:源操作数地址、目的操作数地址、数据串长度(存于CX寄存器)、地址方向的变化(自动增加或减少)</p>
-<h3 id="串传送指令"><a href="#串传送指令" class="headerlink" title="串传送指令"></a>串传送指令</h3><p>串传送指令就是将一串连续存放的数据移到内存的另一个地方，分为字串传送和字节串传送。本指令不影响标志</p>
+<h3 id="串传送指令"><a href="#串传送指令" class="headerlink" title="串传送指令"></a>串传送指令</h3><p>串传送指令就是将一串连续存放的数据移到内存的另一个地方，分为字串传送和字节串传送。本指令不影响标志bb</p>
 <p>指令格式:</p>
 <p>(1):MOVSB:字节传送指令，将源字节串传送到目的地址，地址自动增减1，即ES:[DI]  ⬅  DS:[SI]；SI  ⬅  SI ± 1，DI  ⬅  DI ± 1</p>
 <p>(2):MOVSW:字传送指令，将源字串传送到目的地址，地址自动增减2，即ES:[DI]  ⬅  DS:[SI]；SI  ⬅  SI ± 2，DI  ⬅  DI ± 2</p>
@@ -222,6 +222,32 @@
 <p>指令格式:</p>
 <p>(1):STOSB:字节串存储指令，将AL寄存器的内容传送到ES:[DI]地址中，地址自动增减1，即ES:[DI]  ⬅  AL，DI  ⬅  DI  ± 1</p>
 <p>(2):STOSW:字串存储指令，将AX寄存器的内容传送到ES:[DI]地址中，地址自动增减2，即ES:[DI]  ⬅  AX，DI  ⬅  DI  ± 2</p>
+<h3 id="串比较指令"><a href="#串比较指令" class="headerlink" title="串比较指令"></a>串比较指令</h3><p>串指令用于比较两个数据串是否相等。将主存中的操作数减去目的操作数，通过标志位状态比较两操作数之间的关系。本指令按照减法指令设置标志</p>
+<p>指令格式:</p>
+<ol>
+<li>CMPSB:将源字符串的操作数减去目的字符串的操作数，地址自动增减1，即DS:[SI] - ES:[DI]，SI  ⬅  SI ± 1，DI  ⬅  DI ± 1</li>
+<li>CMPSW:将源字串的操作数减去目的字串的操作数，地址自动减2，即DS:[SI] - ES:[DI]，SI  ⬅  SI ± 2，DI  ⬅  DI ± 2</li>
+</ol>
+<h3 id="串扫描指令"><a href="#串扫描指令" class="headerlink" title="串扫描指令"></a>串扫描指令</h3><p>在数据串中搜索一个数据放入AL，AX中，将AL&#x2F;AX减去目的操作数，根据标志状态比较AL&#x2F;AX与操作数的关系</p>
+<p>指令格式</p>
+<ol>
+<li>SCASB:字符串扫描指令，将AL寄存器的内容减去目的串中ES:[DI]的内容，地址地址自动增减1，即AL - ES:[DI]，DI  ⬅  DI + 1</li>
+<li>SCASW:字串扫描指令，将AX寄存器的内容减去目的串中ES:[DI]的内容，地址地址自动增减2，即AX - ES:[DI]，DI  ⬅  DI + 2</li>
+</ol>
+<h3 id="重复前缀指令"><a href="#重复前缀指令" class="headerlink" title="重复前缀指令"></a>重复前缀指令</h3><p>串操作指令执行一次，仅对数据串中的一个字节或字进行操作。</p>
+<p>串操作指令前都可以加一个重复前缀，实现串操作的重复执行，重复次数隐含在CX中</p>
+<p>重复前缀指令不能单独使用，应写在串操作指令前</p>
+<p>指令格式：</p>
+<p>REP   MOVS&#x2F;REP  STOS&#x2F;REP  LODS</p>
+<p>指令功能：如CX &#x3D; 0，退出串操作，CX≠0，CX  ⬅  CX - 1，重复执行REP后面根的串操作指令，重复次数由CX控制</p>
+<p>指令格式：</p>
+<p>REPZ  CMPS&#x2F;REPZ SCAS</p>
+<p>指令功能：</p>
+<p>如CX &#x3D; 0或ZF &#x3D; 0，退出串操作，也就是说当CX ≠ 0且ZF &#x3D; 1时，CX  ⬅  CX - 1重复执行REPZ后跟的串操作指令，重复次数由CX控制</p>
+<p>指令格式:</p>
+<p>REPZN  CMPS&#x2F;REPNZ SCAS</p>
+<p>指令功能:</p>
+<p>如CX &#x3D; 1或ZF &#x3D; 1，退出串操作，也就是说CX ≠ 0且ZF &#x3D; 0时，CX  ⬅  CX - 1重复执行REPNZ后跟的串操作指令，重复次数由CX控制</p>
 
     </div>
 
@@ -305,7 +331,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B0%E7%9A%84%E5%AF%BB%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">串操作数的寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">串传送指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E5%AD%98%E5%82%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">串存储指令</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%95%B0%E7%9A%84%E5%AF%BB%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">串操作数的寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">串传送指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E5%AD%98%E5%82%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">串存储指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E6%AF%94%E8%BE%83%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">串比较指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E6%89%AB%E6%8F%8F%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">串扫描指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%89%8D%E7%BC%80%E6%8C%87%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">重复前缀指令</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -319,7 +345,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
