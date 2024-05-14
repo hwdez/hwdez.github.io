@@ -27,11 +27,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言:学习X86指令体系下的汇编语言参数">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240514111342567.png">
 <meta property="article:published_time" content="2024-04-23T23:58:35.000Z">
-<meta property="article:modified_time" content="2024-04-24T00:00:16.091Z">
+<meta property="article:modified_time" content="2024-05-14T03:19:02.422Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/$%7Bfiilename%7D/image-20240514111342567.png">
 
 <link rel="canonical" href="http://example.com/2024/04/24/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%8F%82%E6%95%B0/">
 
@@ -173,10 +175,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-04-24 07:58:35 / Modified: 08:00:16" itemprop="dateCreated datePublished" datetime="2024-04-24T07:58:35+08:00">2024-04-24</time>
+              <time title="Created: 2024-04-24 07:58:35" itemprop="dateCreated datePublished" datetime="2024-04-24T07:58:35+08:00">2024-04-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-05-14 11:19:02" itemprop="dateModified" datetime="2024-05-14T11:19:02+08:00">2024-05-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -200,6 +208,58 @@
       
         <p>前言:学习X86指令体系下的汇编语言参数</p>
 <span id="more"></span>
+
+<h3 id="数值型参数"><a href="#数值型参数" class="headerlink" title="数值型参数"></a>数值型参数</h3><h4 id="1、常数"><a href="#1、常数" class="headerlink" title="1、常数"></a>1、常数</h4><p>表示一个固定的数值。</p>
+<p>字符串常数其数值为ASCII码值</p>
+<p>符号常数是用一个标识符表达的一个数值。汇编语言伪指令用一条指令EQU用于定义常量定义符号</p>
+<h4 id="2、符号常数定义伪指令-EQU、"><a href="#2、符号常数定义伪指令-EQU、" class="headerlink" title="2、符号常数定义伪指令(EQU、&#x3D;)"></a>2、符号常数定义伪指令(EQU、&#x3D;)</h4><p>EQU伪指令格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">符号名  EQU 数值表达式</span><br><span class="line">符号名  EQU &lt;字符串&gt;</span><br></pre></td></tr></table></figure>
+
+<p>功能：给符号定义一个数值或把符号定义成一个字符串，也可以说使EQU两边的项<strong>等效</strong>，<strong>可以相互代换</strong></p>
+<p>等价语句<strong>不会给符号名分配存储空间</strong>，符号名不能与其他符号同名，也<strong>不能被重复定义</strong></p>
+<p>“ &#x3D; “伪指令的格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">符号名 = 数值表达式</span><br></pre></td></tr></table></figure>
+
+<p>数值表达式在汇编时应可以计算出数值，其作用同EQU，但用” &#x3D; “定义的符号在同一个程序中，<strong>可以重复定义</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">N = N + 1      ;正确</span><br><span class="line">N EQU N + 1    ;错误</span><br></pre></td></tr></table></figure>
+
+<p>EQU和” &#x3D; “的右边允许出现符号，但该符号必须有确定的值</p>
+<h4 id="3、数值表达式"><a href="#3、数值表达式" class="headerlink" title="3、数值表达式"></a>3、数值表达式</h4><p>数值表达式可分为算数表达式、逻辑表达式、关系表达式。数值表达式的结果由程序计算</p>
+<ul>
+<li>算数运算符：+、-、*、&#x2F;、MOD、SHL、SHR</li>
+<li>逻辑运算符：AND、OR、XOR、NOT</li>
+<li>关系运算符：EQ、NE、GT、LT、GE、LE</li>
+</ul>
+<h3 id="地址型参数"><a href="#地址型参数" class="headerlink" title="地址型参数"></a>地址型参数</h3><h4 id="1、标号"><a href="#1、标号" class="headerlink" title="1、标号"></a>1、标号</h4><p>标号是代码段中可执行语句的地址符号，后面跟着冒号。标号有三种属性：</p>
+<ol>
+<li>段属性：变量所在的段，可以是CS、DS、SS、ES</li>
+<li>偏移量属性：距CS段首地址的偏移量</li>
+<li>类型属性：NEAR表示段内标号，FAR表示段间标号</li>
+</ol>
+<h4 id="2、变量"><a href="#2、变量" class="headerlink" title="2、变量"></a>2、变量</h4><p>变量是在地址段或其他段中存储单元的地址符号</p>
+<ol>
+<li>段属性：变量所在的段，可以是CS、DS、SS、ES</li>
+<li>偏移量属性：距所在段首地址的偏移量</li>
+<li>类型属性：由伪指令来定义，指定存取变量的一个元素所需要的数据的字节类型</li>
+</ol>
+<h4 id="地址表达式"><a href="#地址表达式" class="headerlink" title="地址表达式"></a>地址表达式</h4><p>地址表达式的结果是由汇编程序计算出的存储器地址，没有属性</p>
+<p>变量或标号与某一整数相加减结果仍为变量或标号，属性不变</p>
+<h3 id="特殊运算符"><a href="#特殊运算符" class="headerlink" title="特殊运算符"></a>特殊运算符</h3><h4 id="属性替代运算符"><a href="#属性替代运算符" class="headerlink" title="属性替代运算符"></a>属性替代运算符</h4><ol>
+<li><p>强制类型运算符PTR</p>
+<p>格式： TYPE  PTR  表达式</p>
+<p>TYPE是类型，可以是BYTE、WORD等等</p>
+</li>
+<li><p>定义类型运算符THIS</p>
+<p>THIS指令是与EQU或 &#x3D; 配合使用</p>
+</li>
+</ol>
+<h4 id="数值返回操作数"><a href="#数值返回操作数" class="headerlink" title="数值返回操作数"></a>数值返回操作数</h4><p>这一类操作数只回送操作数的某一属性值</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/image-20240514111342567.png" alt="image-20240514111342567"></p>
+<h4 id="字节分离运算符LOW和HIGH"><a href="#字节分离运算符LOW和HIGH" class="headerlink" title="字节分离运算符LOW和HIGH"></a>字节分离运算符LOW和HIGH</h4><p>格式：LOW表达式或HIGH表达式</p>
+<p>其中表达式的值为16位数据，LOW取表达式值的低字节，HIGH取高字节</p>
+<h4 id="记录专用运算符MASK和WIDTH"><a href="#记录专用运算符MASK和WIDTH" class="headerlink" title="记录专用运算符MASK和WIDTH"></a>记录专用运算符MASK和WIDTH</h4><p>格式：MASK  REC或WIDTH REC</p>
+<p>其中REC为记录字段名，MASK运算结果为该记录字段在记录中的屏蔽码，即该字段各位均为”1”，而记录中其他各位均为”0”的代码；WIDTH运算结果为字段的宽度，即字段的二进制位数</p>
+
     </div>
 
     
@@ -282,6 +342,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E5%9E%8B%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">数值型参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%B8%B8%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">1、常数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E7%AC%A6%E5%8F%B7%E5%B8%B8%E6%95%B0%E5%AE%9A%E4%B9%89%E4%BC%AA%E6%8C%87%E4%BB%A4-EQU%E3%80%81"><span class="nav-number">1.2.</span> <span class="nav-text">2、符号常数定义伪指令(EQU、&#x3D;)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E6%95%B0%E5%80%BC%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3、数值表达式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E5%9E%8B%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">地址型参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E6%A0%87%E5%8F%B7"><span class="nav-number">2.1.</span> <span class="nav-text">1、标号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">2、变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">地址表达式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.</span> <span class="nav-text">特殊运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E6%9B%BF%E4%BB%A3%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.1.</span> <span class="nav-text">属性替代运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E8%BF%94%E5%9B%9E%E6%93%8D%E4%BD%9C%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">数值返回操作数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E5%88%86%E7%A6%BB%E8%BF%90%E7%AE%97%E7%AC%A6LOW%E5%92%8CHIGH"><span class="nav-number">3.3.</span> <span class="nav-text">字节分离运算符LOW和HIGH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E4%B8%93%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6MASK%E5%92%8CWIDTH"><span class="nav-number">3.4.</span> <span class="nav-text">记录专用运算符MASK和WIDTH</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -295,16 +356,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
