@@ -28,7 +28,7 @@
 <meta property="og:description" content="前言：学习DOS系统调用功能">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-05-09T11:07:33.000Z">
-<meta property="article:modified_time" content="2024-05-09T12:09:59.721Z">
+<meta property="article:modified_time" content="2024-06-17T11:48:41.184Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-05-09 19:07:33 / Modified: 20:09:59" itemprop="dateCreated datePublished" datetime="2024-05-09T19:07:33+08:00">2024-05-09</time>
+              <time title="Created: 2024-05-09 19:07:33" itemprop="dateCreated datePublished" datetime="2024-05-09T19:07:33+08:00">2024-05-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-17 19:48:41" itemprop="dateModified" datetime="2024-06-17T19:48:41+08:00">2024-06-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -201,7 +207,7 @@
         <p>前言：学习DOS系统调用功能</p>
 <span id="more"></span>
 
-<h3 id="单字符输出-1号功能调用"><a href="#单字符输出-1号功能调用" class="headerlink" title="单字符输出(1号功能调用)"></a>单字符输出(1号功能调用)</h3><p>格式：</p>
+<h3 id="单字符输入-1号功能调用"><a href="#单字符输入-1号功能调用" class="headerlink" title="单字符输入(1号功能调用)"></a>单字符输入(1号功能调用)</h3><p>格式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah,1</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
 
 <p>功能：等待用户从键盘输入一个字符，并将字符的ASCII码送入AL寄存器中，同时将该字符在显示器上显示</p>
@@ -209,7 +215,7 @@
 <h3 id="单个字符显示-2号功能调用"><a href="#单个字符显示-2号功能调用" class="headerlink" title="单个字符显示(2号功能调用)"></a>单个字符显示(2号功能调用)</h3><p>格式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ah,2</span><br><span class="line">mov dl,&lt;字符ascii码&gt;</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
 
-<p>功能：在屏幕当前位置显示DL寄存器中的字符，并将光标后移一格</p>
+<p>功能：在屏幕当前位置显示DL寄存器中的字符，并将光标后移一格(将要显示字符经过<code>OR DL,30H</code>就是ASCII码的形式)</p>
 <h3 id="异步通信口输入-3号调用"><a href="#异步通信口输入-3号调用" class="headerlink" title="异步通信口输入(3号调用)"></a>异步通信口输入(3号调用)</h3><p>格式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah,3</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
 
@@ -328,7 +334,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%AD%97%E7%AC%A6%E8%BE%93%E5%87%BA-1%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">单字符输出(1号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E5%AD%97%E7%AC%A6%E6%98%BE%E7%A4%BA-2%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">单个字符显示(2号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1%E5%8F%A3%E8%BE%93%E5%85%A5-3%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">异步通信口输入(3号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1%E5%8F%A3%E8%BE%93%E5%87%BA-4%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">异步通信口输出(4号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E8%BE%93%E5%87%BA-5%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">打印输出(5号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BE%93%E5%87%BA-9%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">字符串输出(9号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BE%93%E5%85%A5-10%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">字符串输入(10号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EDOS%E8%B0%83%E7%94%A8-4CH%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">8.</span> <span class="nav-text">返回DOS调用(4CH号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E8%AE%BE%E7%BD%AE%E8%B0%83%E7%94%A8-2BH%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">9.</span> <span class="nav-text">日期设置调用(2BH号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%97%A5%E6%9C%9F%E8%B0%83%E7%94%A8-2AH%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">10.</span> <span class="nav-text">读取日期调用(2AH号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E8%AE%BE%E7%BD%AE%E8%B0%83%E7%94%A8-2DH%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">11.</span> <span class="nav-text">时间设置调用(2DH号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%97%B6%E9%97%B4-2CH%E5%8F%B7-%E8%B0%83%E7%94%A8-2CH%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">12.</span> <span class="nav-text">读取时间(2CH号)调用(2CH号功能调用)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%AD%97%E7%AC%A6%E8%BE%93%E5%85%A5-1%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">单字符输入(1号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E5%AD%97%E7%AC%A6%E6%98%BE%E7%A4%BA-2%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">单个字符显示(2号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1%E5%8F%A3%E8%BE%93%E5%85%A5-3%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">异步通信口输入(3号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E9%80%9A%E4%BF%A1%E5%8F%A3%E8%BE%93%E5%87%BA-4%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">异步通信口输出(4号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E8%BE%93%E5%87%BA-5%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">打印输出(5号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BE%93%E5%87%BA-9%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">字符串输出(9号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BE%93%E5%85%A5-10%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">字符串输入(10号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EDOS%E8%B0%83%E7%94%A8-4CH%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">8.</span> <span class="nav-text">返回DOS调用(4CH号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E8%AE%BE%E7%BD%AE%E8%B0%83%E7%94%A8-2BH%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">9.</span> <span class="nav-text">日期设置调用(2BH号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%97%A5%E6%9C%9F%E8%B0%83%E7%94%A8-2AH%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">10.</span> <span class="nav-text">读取日期调用(2AH号功能调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E8%AE%BE%E7%BD%AE%E8%B0%83%E7%94%A8-2DH%E5%8F%B7%E8%B0%83%E7%94%A8"><span class="nav-number">11.</span> <span class="nav-text">时间设置调用(2DH号调用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%97%B6%E9%97%B4-2CH%E5%8F%B7-%E8%B0%83%E7%94%A8-2CH%E5%8F%B7%E5%8A%9F%E8%83%BD%E8%B0%83%E7%94%A8"><span class="nav-number">12.</span> <span class="nav-text">读取时间(2CH号)调用(2CH号功能调用)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -342,7 +348,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
