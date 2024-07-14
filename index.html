@@ -145,6 +145,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/13/%E8%AE%A1%E7%BB%84%E4%B9%8B%E5%90%84%E7%A1%AC%E4%BB%B6%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/07/13/%E8%AE%A1%E7%BB%84%E4%B9%8B%E5%90%84%E7%A1%AC%E4%BB%B6%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计组之各硬件的工作原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-07-13 20:45:41" itemprop="dateCreated datePublished" datetime="2024-07-13T20:45:41+08:00">2024-07-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-07-14 23:09:46" itemprop="dateModified" datetime="2024-07-14T23:09:46+08:00">2024-07-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机组成原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前言：学习计算机组成原理之各个部件的工作原理</p>
+<h3 id="主存储器"><a href="#主存储器" class="headerlink" title="主存储器"></a>主存储器</h3><h4 id="存储体"><a href="#存储体" class="headerlink" title="存储体"></a>存储体</h4><ul>
+<li><p>主存储器中用于存放数据的是<u>存储体</u>，存储体保存许多的<u>存储单元</u></p>
+</li>
+<li><p><u>存储单元</u>又包含了许多的<u>存储元件</u>（或称存储基元、存储元）,每个存储元件能寄存<u>一位二进制代码</u></p>
+</li>
+<li><p>一个<u>存储单元</u>能存储<u>一串二进制代码</u>，这串二进制代码为<u>一个存储字</u></p>
+</li>
+<li><p>这一串二进制代码中的<u>二进制的位数</u>我们称为<u>存储字长</u>（常见字长为16位、32位、64位）</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/b53ef7aa724e44188eaa7ce011d09446.png" alt="在这里插入图片描述"></p>
+<p>存储单元:每个存储单元存放一串二进制代码</p>
+<p>存储字(word):存储单元中二进制代码的组合</p>
+<p>存储字长:存储单元中二进制代码的位数(通常是8bit的整数倍)</p>
+<p>存储元:即存储二进制的电子元件,每个存储单元可存1bit</p>
+</li>
+</ul>
+<h4 id="MAR-Memory-Address-Register-存储地址寄存器"><a href="#MAR-Memory-Address-Register-存储地址寄存器" class="headerlink" title="MAR(Memory Address Register)存储地址寄存器"></a>MAR(Memory Address Register)存储地址寄存器</h4><p>用于存放欲访问的存储单元的地址,其<strong>位数对应存储器单元的个数</strong>(如RAM位数为10位,则<strong>存储单元</strong>的个数为2^10^个,也就是1024个存储单元,记为1K),其<strong>位数与存储字长相等</strong></p>
+<h4 id="MDR-Memory-Address-Register-存储数据寄存器"><a href="#MDR-Memory-Address-Register-存储数据寄存器" class="headerlink" title="MDR(Memory Address Register)存储数据寄存器"></a>MDR(Memory Address Register)存储数据寄存器</h4><p>用于存放从存储体某单元取出的代码或者存放准备存入存储体的代码,其<strong>位数与存储字长相等</strong></p>
+<p>易混淆:<strong>1个字节(byte) &#x3D; 8bit</strong></p>
+<p>​		   <strong>1B &#x3D; 1个字节,1b &#x3D; 1个bit</strong></p>
+<h3 id="运算器的基本组成"><a href="#运算器的基本组成" class="headerlink" title="运算器的基本组成"></a>运算器的基本组成</h3><p><img src="/../imgs/$%7Bfiilename%7D/fee4781d0cab4b74b2d501cf1130bae5.png" alt="在这里插入图片描述"></p>
+<p>用于实现算数运算、逻辑运算</p>
+<h4 id="ACC-Accumulator-累加器"><a href="#ACC-Accumulator-累加器" class="headerlink" title="ACC(Accumulator)累加器"></a>ACC(Accumulator)累加器</h4><p>存储算数运算的操作数，同时也用于存放运算的结果</p>
+<h4 id="MQ-Multiplier-Quotient-Register-乘商寄存器"><a href="#MQ-Multiplier-Quotient-Register-乘商寄存器" class="headerlink" title="MQ(Multiplier-Quotient Register)乘商寄存器"></a>MQ(Multiplier-Quotient Register)乘商寄存器</h4><p>存储乘法运算的结果和除法运算的余数，只有在乘除法运算中才有使用</p>
+<h4 id="X通用操作数寄存器"><a href="#X通用操作数寄存器" class="headerlink" title="X通用操作数寄存器"></a>X通用操作数寄存器</h4><p>用于存放操作数</p>
+<h4 id="ALU算数逻辑单元-核心"><a href="#ALU算数逻辑单元-核心" class="headerlink" title="ALU算数逻辑单元(核心)"></a>ALU算数逻辑单元(核心)</h4><p>通过内部复杂的电路实现算数运算，逻辑运算</p>
+<h3 id="控制器的基本组成"><a href="#控制器的基本组成" class="headerlink" title="控制器的基本组成"></a>控制器的基本组成</h3><h4 id="CU-Control-Unit-控制单元"><a href="#CU-Control-Unit-控制单元" class="headerlink" title="CU(Control Unit)控制单元"></a>CU(Control Unit)控制单元</h4><h4 id="IR-Instruction-Register-指令寄存器"><a href="#IR-Instruction-Register-指令寄存器" class="headerlink" title="IR(Instruction Register)指令寄存器"></a>IR(Instruction Register)指令寄存器</h4><h4 id="PC-Program-Counter-程序计数器"><a href="#PC-Program-Counter-程序计数器" class="headerlink" title="PC(Program Counter)程序计数器"></a>PC(Program Counter)程序计数器</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/11/%E8%AE%A1%E7%BB%84%E4%B9%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -171,6 +270,22 @@
 
               <time title="Created: 2024-07-11 16:45:00" itemprop="dateCreated datePublished" datetime="2024-07-11T16:45:00+08:00">2024-07-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-07-13 20:44:29" itemprop="dateModified" datetime="2024-07-13T20:44:29+08:00">2024-07-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机组成原理</span></a>
+                </span>
+            </span>
 
           
 
@@ -183,7 +298,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h3 id="现代计算机的组成结构"><a href="#现代计算机的组成结构" class="headerlink" title="现代计算机的组成结构"></a>现代计算机的组成结构</h3><p><img src="/../imgs/$%7Bfiilename%7D/8ceda7634c024f1b8ed2a361c8786392.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>控制器通过控制线向运算器控制加减乘除</li>
+<li>同时，控制器通过控制线控制外设</li>
+<li>主存储器和CPU(中央处理器)进行数据交换</li>
+<li>主存储器将指令传给控制器由控制器来解析这条指令的含义，并发出相应的控制信号</li>
+</ul>
+<p>&#x3D;&#x3D;存储器可分为主存和辅存，主存就是熟知的内存；辅存就是辅助存储器，如电脑中的机械硬盘，机械硬盘&#x3D;&#x3D;</p>
+<p>主机中只包含主存，辅存属于I&#x2F;O设备</p>
+
       
     </div>
 
@@ -840,87 +964,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/22/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E4%B8%AD%E6%96%AD%E6%8C%87%E4%BB%A4%E5%92%8C%E4%B8%AD%E6%96%AD%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/22/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E4%B8%AD%E6%96%AD%E6%8C%87%E4%BB%A4%E5%92%8C%E4%B8%AD%E6%96%AD%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">X86指令体系下的中断指令和中断返回指令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-04-22 19:18:38" itemprop="dateCreated datePublished" datetime="2024-04-22T19:18:38+08:00">2024-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-05-09 19:01:02" itemprop="dateModified" datetime="2024-05-09T19:01:02+08:00">2024-05-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">汇编语言</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前言:学习X86指令体系下的中断指令和中断返回指令</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/22/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E4%B8%AD%E6%96%AD%E6%8C%87%E4%BB%A4%E5%92%8C%E4%B8%AD%E6%96%AD%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -990,16 +1033,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
