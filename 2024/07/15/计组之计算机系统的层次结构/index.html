@@ -20,15 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":false,"padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86/index.html">
+  <meta name="description" content="前言：学习计算机系统的层次结构 层次结构 计算机层次结构的三个级别的语言高级语言、汇编语言、机器语言 ps：部分高级语言通过编译器可以直接转为机器语言；并且有些语言是通过解释器转为机器语言(JavaScript、Python、Shell等) 编译程序是将高级语言一次性全部翻译为机器语言程序，而解释程序是将源程序一句一句翻译并且再执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计组之计算机系统的层次结构">
+<meta property="og:url" content="http://example.com/2024/07/15/%E8%AE%A1%E7%BB%84%E4%B9%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言：学习计算机系统的层次结构 层次结构 计算机层次结构的三个级别的语言高级语言、汇编语言、机器语言 ps：部分高级语言通过编译器可以直接转为机器语言；并且有些语言是通过解释器转为机器语言(JavaScript、Python、Shell等) 编译程序是将高级语言一次性全部翻译为机器语言程序，而解释程序是将源程序一句一句翻译并且再执行">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/imgs/$%7Bfiilename%7D/656852342d5f33af14ebd857ff8781ef.png">
+<meta property="article:published_time" content="2024-07-15T14:23:32.000Z">
+<meta property="article:modified_time" content="2024-08-03T08:42:58.167Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机组成与原理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/$%7Bfiilename%7D/656852342d5f33af14ebd857ff8781ef.png">
 
-<link rel="canonical" href="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86/">
+<link rel="canonical" href="http://example.com/2024/07/15/%E8%AE%A1%E7%BB%84%E4%B9%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
 
 
 <script id="page-configurations">
@@ -36,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tag: 计算机组成部分 | Hexo</title>
+  <title>计组之计算机系统的层次结构 | Hexo</title>
   
 
 
@@ -139,51 +146,102 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">计算机组成部分
-          <small>Tag</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/15/%E8%AE%A1%E7%BB%84%E4%B9%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计组之计算机系统的层次结构
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-07-15 22:23:32" itemprop="dateCreated datePublished" datetime="2024-07-15T22:23:32+08:00">2024-07-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-08-03 16:42:58" itemprop="dateModified" datetime="2024-08-03T16:42:58+08:00">2024-08-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机组成原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
+        <p>前言：学习计算机系统的层次结构</p>
+<h3 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h3><p><img src="/../imgs/$%7Bfiilename%7D/656852342d5f33af14ebd857ff8781ef.png" alt="请添加图片描述"></p>
+<h3 id="计算机层次结构的三个级别的语言"><a href="#计算机层次结构的三个级别的语言" class="headerlink" title="计算机层次结构的三个级别的语言"></a>计算机层次结构的三个级别的语言</h3><p>高级语言、汇编语言、机器语言</p>
+<p><strong>ps：部分高级语言通过编译器可以直接转为机器语言；并且有些语言是通过解释器转为机器语言(JavaScript、Python、Shell等)</strong></p>
+<p>编译程序是将高级语言一次性全部翻译为机器语言程序，而解释程序是将源程序一句一句翻译并且再执行</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-13T20:45:41+08:00"
-              content="2024-07-13">
-          07-13
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E5%8E%9F%E7%90%86/" rel="tag"># 计算机组成与原理</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/13/%E8%AE%A1%E7%BB%84%E4%B9%8B%E5%90%84%E7%A1%AC%E4%BB%B6%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" itemprop="url">
-            <span itemprop="name">计组之各硬件的工作原理</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/13/%E8%AE%A1%E7%BB%84%E4%B9%8B%E5%90%84%E7%A1%AC%E4%BB%B6%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" rel="prev" title="计组之各硬件的工作原理">
+      <i class="fa fa-chevron-left"></i> 计组之各硬件的工作原理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/08/03/%E8%AE%A1%E7%BB%84%E4%B9%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/" rel="next" title="计组之计算机的性能指标">
+      计组之计算机的性能指标 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -236,6 +294,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BA%A7%E5%88%AB%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">计算机层次结构的三个级别的语言</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -249,7 +308,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
