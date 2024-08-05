@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-08-03 16:43:52 / Modified: 17:24:01" itemprop="dateCreated datePublished" datetime="2024-08-03T16:43:52+08:00">2024-08-03</time>
+              <time title="Created: 2024-08-03 16:43:52" itemprop="dateCreated datePublished" datetime="2024-08-03T16:43:52+08:00">2024-08-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-08-05 22:13:03" itemprop="dateModified" datetime="2024-08-05T22:13:03+08:00">2024-08-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -197,7 +203,66 @@
 <h3 id="度量存储器的性能指标"><a href="#度量存储器的性能指标" class="headerlink" title="度量存储器的性能指标"></a>度量存储器的性能指标</h3><p>之前我们学过：MAR存储地址单元、MDR存放数据单元</p>
 <p>MAR位数反映存储单元的个数(最多支持多少个)、MDR位数反映存储字长，即每个存储单元的大小</p>
 <p>公式：<strong>总容量 &#x3D; 存储单元个数✖存储字长 bit</strong></p>
-<p>Eg: MAR为32位，MDR为8位，则总容量 &#x3D; 2^32^ * 8 &#x3D; 4GB</p>
+<p>eg: MAR为32位，MDR为8位，则总容量 &#x3D; 2^32^ * 8 &#x3D; 4GB</p>
+<p>2^10^ &#x3D; K； 2^20^ &#x3D; M ； 2^30^ &#x3D; G； 2^40^：T</p>
+<h3 id="度量CPU的性能指标"><a href="#度量CPU的性能指标" class="headerlink" title="度量CPU的性能指标"></a>度量CPU的性能指标</h3><p>衡量CPU的性能指标可以分为6项</p>
+<h4 id="主频-Clock-Speed"><a href="#主频-Clock-Speed" class="headerlink" title="主频(Clock Speed)"></a>主频(Clock Speed)</h4><p>主频是CPU内数字脉冲信号振荡的频率，单位为赫兹。主频越高，CPU执行指令的速度越快</p>
+<p><strong>一个波峰到波谷为一个CPU的时钟周期</strong>；CPU的主频 &#x3D; 1&#x2F;CPU的时钟周期</p>
+<p>CPU主频是指CPU的工作频率，也叫做时钟频率，是衡量CPU性能的一个指标。它表示CPU每秒钟能够执行的时钟周期数。单位一般是赫兹(Hz)表示，即<strong>每秒钟的周期数</strong></p>
+<p>要注意的是，不同架构下的CPU在相同的主频下，其实际性能可能会存在差异</p>
+<h4 id="核心数量-Number-of-Cores"><a href="#核心数量-Number-of-Cores" class="headerlink" title="核心数量(Number of Cores)"></a>核心数量(Number of Cores)</h4><ul>
+<li>CPU的核心数量指的是CPU芯片上包含的<strong>独立处理单元个数</strong>。每个核心都可以独立执行指令和进行计算操作。核心数量的增加可以<strong>提高CPU的并行处理能力</strong>，从而加快计算速度和提高系统响应速度</li>
+<li>多核心CPU的好处是同时处理多个任务</li>
+</ul>
+<h4 id="缓存大小"><a href="#缓存大小" class="headerlink" title="缓存大小"></a>缓存大小</h4><p>CPU缓存是位于CPU内部的一种高速存储器，用于临时存储CPU频繁访问的数据和指令。CPU缓存的作用是减少CPU与主内存之间的数据传输次数，从而提高系统的运行效率</p>
+<p>CPU缓存分为三级缓存：L1缓存、L2缓存和L3缓存。<strong>L1缓存</strong>是距离CPU最近的一级缓存，<strong>速度最快但容量最小</strong>。<strong>L2缓存是位于L1缓存和主内存之间</strong>，速度较慢但容量较大。<strong>L3缓存</strong>是一些高端处理器上的额外缓存，<strong>容量最大</strong>，<strong>但速度较慢</strong>。多级缓存的设计是为了在速度和容量之间取得平衡。</p>
+<p>较大的缓存可以提供更多的存储空间，从而能够存储更多的数据和指令。这样就可以减少CPU和主内存之间的数据交换次数，避免频繁地访问主内存，从而提高系统的运行速度</p>
+<p>缓存的访问速度远远快于主内存</p>
+<h4 id="指令集架构-Computer-Processing-Unit-Set-Architecture"><a href="#指令集架构-Computer-Processing-Unit-Set-Architecture" class="headerlink" title="指令集架构(Computer Processing Unit Set Architecture)"></a>指令集架构(Computer Processing Unit Set Architecture)</h4><p>CPU指令集架构是指CPU支持的指令集合和对指令的操作方式的规定。它决定了程序员和编译器如何与CPU进行交互和编程</p>
+<p>常见的CPU指令集架构包括：</p>
+<ul>
+<li><strong>X86架构</strong>：广泛应用于个人计算机和服务器。它是传统的桌面和服务器处理器架构，具有较强的兼容性和广泛的软件支持</li>
+<li><strong>ARM架构</strong>：广泛运用于移动设备和嵌入式系统。ARM架构具有低功耗、高度可定制和较低成本等优点</li>
+<li>MIPS架构：采用精简指令集(Reduced Instruction Set Computing)架构，主要应用与嵌入式系统和网络设备</li>
+<li>Power架构：由IBM、Apple和Motorola等公司开发，主要应用于服务器和超级计算机。它具有高性能和较低的功耗特性、</li>
+</ul>
+<p>不同的架构对CPU性能的影响主要体现在<strong>执行效率</strong>、指令集支持、<strong>高级功能支持</strong>和<strong>内存管理</strong>上</p>
+<h4 id="浮点运算性能"><a href="#浮点运算性能" class="headerlink" title="浮点运算性能"></a>浮点运算性能</h4><p>计算机处理浮点数(即具有小数点的数值)的能力和速度</p>
+<ul>
+<li><p>浮点数表示：计算机内部使用二进制来表示浮点数。最常见的浮点数表示方法是IEEE 754标准，它定义了单精度浮点数(32位)和双精度浮点数(64位)的表示方法</p>
+</li>
+<li><p>浮点运算器：现代计算机通常内置浮点运算器(FPU),是专门用于执行浮点运算的硬件</p>
+</li>
+<li><p>浮点运算性能指标：包括<strong>峰值性能</strong>、<strong>吞吐量</strong>和<strong>延迟</strong>等</p>
+<p>1、峰值性能是指浮点运算器能够达到的最高运算速度。它通常使用FLOPS(Floating Point Operation Per Second)作为计量单位，表示每秒能够执行的浮点运算次数</p>
+<p>2、吞吐量是指在给定时间内系统完成的浮点运算数量。它可以通过执行多个浮点运算、利用多个执行单元和流水线等计数来提高吞吐量</p>
+<p>3、延迟是指完成单个浮点运算所需的时间，通常以时钟周期位单位。较低的延迟意味着能够更快地完成单个浮点运算</p>
+</li>
+<li><p>浮点运算优化：为了提高浮点运算性能，可以采取一些优化措施。例如，使用SIMD指令(Single Instruction Multiple Data)可以同时对多个浮点数执行相同的操作，从而提高吞吐量。优化内存访问模式、减少数据依赖等也可以改善浮点运算的性能</p>
+</li>
+<li><p>GPU的浮点运算性能：图形处理器在浮点运算方面通常比中央处理器更加强大。GPU具有大量的并行计算单元，在图形渲染、科学计算还和机器学习等邻域具有突出的性能</p>
+</li>
+</ul>
+<h4 id="热设计功耗-TDP"><a href="#热设计功耗-TDP" class="headerlink" title="热设计功耗(TDP)"></a>热设计功耗(TDP)</h4><p>TDP是指处理器在正常工作情况下所能产生的热量的最大值或平均值。它是厂商根据处理器设计和制造工艺的特点进行评估和规定的</p>
+<p>TDP对CPU性能有一下几方面的影响：</p>
+<ul>
+<li>散热和冷却要求：超出处理器能够承受的温度范围会导致性能下降或甚至损坏。</li>
+<li>功耗和能效：一般而言，功耗越高，处理器性能可能越好，但能效可能较低</li>
+<li>超频能力：处理器的超频能力取决于其有效的散热能力。超频指的是处理器运行在高于标称频率的工作状态。如果处理器的热设计功耗较低，其散热能力可能限制其超频能力。</li>
+</ul>
+<p>总的来说：热设计功耗对CPU性能的影响主要体现在散热和冷却需求、功耗和能效以及超频能力等方面。较高的热设计功耗可能需要更强的散热解决方案，并且可能对能效产生负面影响。</p>
+<h4 id="IPC-Instructions-Per-Cycle"><a href="#IPC-Instructions-Per-Cycle" class="headerlink" title="IPC(Instructions Per Cycle)"></a>IPC(Instructions Per Cycle)</h4><p>IPC是指每个时钟周期内执行的指令数。它是衡量CPU性能的重要指标之一</p>
+<p>IPC提高意味着CPU效率的提高，影响IPC的因素有如下几点：</p>
+<ul>
+<li>架构设计</li>
+<li>流水线(Pipeline)技术：流水线允许CPU同时处理多条指令的不同阶段。通过将指令的执行分成多个阶段并行处理可以提高CPU的IPC</li>
+<li>高速缓存(Cache)</li>
+<li>分支预测(Branch Prediction)：分支指令的执行对IPC有很大影响，因为分支指令可能引起流水线的中断。好的分支预测算法可以降低流水线的中断次数，从而提高IPC</li>
+<li>乱序执行(Out-of-Order Execution)：乱序执行技术允许CPU根据指令之间的依赖关系，自动调整指令的执行顺序，以最大程度地提高指令的并行度和IPC</li>
+</ul>
+<h3 id="度量系统整体的性能指标"><a href="#度量系统整体的性能指标" class="headerlink" title="度量系统整体的性能指标"></a>度量系统整体的性能指标</h3><p><strong>数据通路宽带</strong>：数据总线一次所能并行传送信息的位数(各硬件部件通过数据总线传输数据)</p>
+<p><strong>响应时间</strong></p>
+<h3 id="动态测试"><a href="#动态测试" class="headerlink" title="动态测试"></a>动态测试</h3><p>基准程序是用来测量计算机处理速度的一种实用程序，以便于被测量的计算机性能可以与运行相同程序的其他计算机性能进行比较</p>
 
       
     </div>
