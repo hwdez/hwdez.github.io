@@ -145,6 +145,207 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/08/python%E4%B9%8B%E5%88%87%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/08/python%E4%B9%8B%E5%88%87%E7%89%87/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-08-08 16:25:43 / Modified: 22:46:46" itemprop="dateCreated datePublished" datetime="2024-08-08T16:25:43+08:00">2024-08-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前言：打CTF的时候去遇到了python中的切片问题，来学习一下</p>
+<h3 id="Python可切片对象的索引方式"><a href="#Python可切片对象的索引方式" class="headerlink" title="Python可切片对象的索引方式"></a>Python可切片对象的索引方式</h3><p>分为正索引和负索引两种，以list对象为a &#x3D; [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]为例：</p>
+<p><img src="/../imgs/$%7Bfiilename%7D/14029140-3da45bbfe1029df4.jpg" alt="img"></p>
+<h3 id="Python切片操作的一般方式"><a href="#Python切片操作的一般方式" class="headerlink" title="Python切片操作的一般方式"></a>Python切片操作的一般方式</h3><p>一个完整的切片表达式包含两个”:”，用于分割三个参数(start_index:end_index:_step)。当只有”:”时，默认第三个参数step &#x3D; 1；当一个”:”也没有时，start_index &#x3D; end_index，表示切取start_index指定的那个元素</p>
+<p>切片操作基本表达式：object[start_index:end_index:step]</p>
+<p><strong>step</strong>：正负数均可，其绝对值大小决定切取数据时的”步长”，正负号决定切取方向，正号表示”从左往右”，负表示”从右往左”，step值省略默认为1</p>
+<p><strong>start_index</strong>：表示起始索引(包含该索引对应的值)，该值省略表示对象”端点”开始，step为正时，从起点开始，反之终点开始</p>
+<p><strong>end_index</strong>：表示终止索引值(不包含该索引对应的值)，该值省略表示”端点”结束，step为正时，到终点结束，反之起点结束</p>
+<h3 id="Python切片操作详细例子"><a href="#Python切片操作详细例子" class="headerlink" title="Python切片操作详细例子"></a>Python切片操作详细例子</h3><p>以list对象a &#x3D; [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]为例：</p>
+<h4 id="切取单个元素"><a href="#切取单个元素" class="headerlink" title="切取单个元素"></a>切取单个元素</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a[<span class="number">0</span>]</span><br><span class="line">&gt;&gt;&gt;<span class="number">0</span></span><br><span class="line">&gt;&gt;&gt;a[-<span class="number">4</span>]</span><br><span class="line">&gt;&gt;&gt;<span class="number">6</span></span><br><span class="line">当索引只有一个数时，表示切取某一元素</span><br></pre></td></tr></table></figure>
+
+<h4 id="切取完整对象"><a href="#切取完整对象" class="headerlink" title="切取完整对象"></a>切取完整对象</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a[:]从左往右</span><br><span class="line">&gt;&gt;&gt;[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">&gt;&gt;&gt;a[::]从左往右</span><br><span class="line">&gt;&gt;&gt;[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">&gt;&gt;&gt;a[::-<span class="number">1</span>]从右往左</span><br><span class="line">&gt;&gt;&gt;[<span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="一层切片的例子"><a href="#一层切片的例子" class="headerlink" title="一层切片的例子"></a>一层切片的例子</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a[<span class="number">1</span>:<span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">&gt;&gt;&gt;step = <span class="number">1</span>,从左往右取值，start_index = <span class="number">1</span>;end_index = <span class="number">6</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;a[<span class="number">1</span>:<span class="number">6</span>:-<span class="number">1</span>]</span><br><span class="line">&gt;&gt;&gt;[] ;输出空列表</span><br><span class="line">step = -<span class="number">1</span>，说明是从右往左取值，但是start小于end是从左往右，矛盾</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;a[<span class="number">6</span>:<span class="number">2</span>]</span><br><span class="line">&gt;&gt;&gt;[] ;输出空列表</span><br><span class="line">step = <span class="number">1</span>，说明是从左往右取值，但是start大于end是从右往左取值，矛盾</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;a[:<span class="number">6</span>:-<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>]</span><br><span class="line">step= -<span class="number">1</span>，说明是从右往左取值</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;a[<span class="number">6</span>::-<span class="number">1</span>]</span><br><span class="line">&gt;&gt;&gt;[<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">step = -<span class="number">1</span>，说明是从start = <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="多层切片操作"><a href="#多层切片操作" class="headerlink" title="多层切片操作"></a>多层切片操作</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a[:<span class="number">8</span>][<span class="number">2</span>:<span class="number">5</span>][-<span class="number">1</span>:]</span><br><span class="line">&gt;&gt;&gt;[<span class="number">4</span>]</span><br><span class="line">相当于</span><br><span class="line">a[:<span class="number">8</span>]=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line">a[:<span class="number">8</span>][<span class="number">2</span>:<span class="number">5</span>]=[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">a[:<span class="number">8</span>][<span class="number">2</span>:<span class="number">5</span>][-<span class="number">1</span>:]=[<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/08/%E6%9A%91%E5%81%87%E5%81%9A%E7%9A%84RE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/08/%E6%9A%91%E5%81%87%E5%81%9A%E7%9A%84RE%E9%A2%98/" class="post-title-link" itemprop="url">暑假做的RE题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-08-08 16:04:53 / Modified: 16:07:11" itemprop="dateCreated datePublished" datetime="2024-08-08T16:04:53+08:00">2024-08-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前言：暑假练习一些CTF的题目</p>
+<h2 id="1、"><a href="#1、" class="headerlink" title="1、"></a>1、</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/05/%E8%AE%A1%E7%BB%84%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/05/%E8%AE%A1%E7%BB%84%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">计组之数据的表示和运算</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-08-05 22:15:21 / Modified: 22:26:54" itemprop="dateCreated datePublished" datetime="2024-08-05T22:15:21+08:00">2024-08-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/03/%E8%AE%A1%E7%BB%84%E4%B9%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -780,253 +981,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/06/%E4%BA%8C%E5%8F%89%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/06/%E4%BA%8C%E5%8F%89%E6%A0%91/" class="post-title-link" itemprop="url">二叉树</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-05-06 09:58:55" itemprop="dateCreated datePublished" datetime="2024-05-06T09:58:55+08:00">2024-05-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-05-10 14:58:03" itemprop="dateModified" datetime="2024-05-10T14:58:03+08:00">2024-05-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前言:学习数据结构中的二叉树，很重要</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/06/%E4%BA%8C%E5%8F%89%E6%A0%91/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/04/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/04/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">X86指令体系下的字符串操作指令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-05-04 23:43:52" itemprop="dateCreated datePublished" datetime="2024-05-04T23:43:52+08:00">2024-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-05-08 20:09:52" itemprop="dateModified" datetime="2024-05-08T20:09:52+08:00">2024-05-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">汇编语言</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前言:学习X86指令体系下的字符串操作指令</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/04/X86%E6%8C%87%E4%BB%A4%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/24/PE%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/24/PE%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">PE文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-04-24 20:00:21" itemprop="dateCreated datePublished" datetime="2024-04-24T20:00:21+08:00">2024-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-04-25 12:21:12" itemprop="dateModified" datetime="2024-04-25T12:21:12+08:00">2024-04-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前言:学习PE文件</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/24/PE%E6%96%87%E4%BB%B6/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1092,7 +1050,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
